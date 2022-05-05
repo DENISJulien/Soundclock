@@ -20,73 +20,74 @@ class Banner
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $name_banner;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $status;
+    private $status_banner;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $created_at;
+    private $created_at_banner;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updated_at_banner;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameBanner(): ?string
     {
-        return $this->name;
+        return $this->name_banner;
     }
 
-    public function setName(string $name): self
+    public function setNameBanner(string $name_banner): self
     {
-        $this->name = $name;
+        $this->name_banner = $name_banner;
 
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatusBanner(): ?int
     {
-        return $this->status;
+        return $this->status_banner;
     }
 
-    public function setStatus(int $status): self
+    public function setStatusBanner(int $status_banner): self
     {
-        $this->status = $status;
+        $this->status_banner = $status_banner;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAtBanner(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->created_at_banner;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAtBanner(\DateTimeImmutable $created_at_banner): self
     {
-        $this->created_at = $created_at;
+        $this->created_at_banner = $created_at_banner;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAtBanner(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updated_at_banner;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAtBanner(?\DateTimeInterface $updated_at_banner): self
     {
-        $this->updated_at = $updated_at;
+        $this->updated_at_banner = $updated_at_banner;
 
         return $this;
     }
+
 }

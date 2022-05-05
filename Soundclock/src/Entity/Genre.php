@@ -35,22 +35,23 @@ class Genre
     /**
      * @ORM\Column(type="integer")
      */
-    private $status;
+    private $status_genre;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $slug;
+    private $slug_genre;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $created_at;
+    private $created_at_genre;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updated_at_genre;
+
 
     public function getId(): ?int
     {
@@ -93,51 +94,52 @@ class Genre
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatusGenre(): ?int
     {
-        return $this->status;
+        return $this->status_genre;
     }
 
-    public function setStatus(int $status): self
+    public function setStatusGenre(int $status_genre): self
     {
-        $this->status = $status;
+        $this->status_genre = $status_genre;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlugGenre(): ?string
     {
-        return $this->slug;
+        return $this->slug_genre;
     }
 
-    public function setSlug(string $slug): self
+    public function setSlugGenre(string $slug_genre): self
     {
-        $this->slug = $slug;
+        $this->slug_genre = $slug_genre;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAtGenre(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->created_at_genre;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAtGenre(\DateTimeImmutable $created_at_genre): self
     {
-        $this->created_at = $created_at;
+        $this->created_at_genre = $created_at_genre;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAtGenre(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updated_at_genre;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAtGenre(?\DateTimeInterface $updated_at_genre): self
     {
-        $this->updated_at = $updated_at;
+        $this->updated_at_genre = $updated_at_genre;
 
         return $this;
     }
+
 }

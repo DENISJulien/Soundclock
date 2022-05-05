@@ -36,6 +36,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name_user;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture_user;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_user;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $certification_user;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $status_user;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $label_user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug_user;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $created_at_user;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at_user;
 
     public function getId(): ?int
     {
@@ -124,6 +168,114 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getNameUser(): ?string
+    {
+        return $this->name_user;
+    }
+
+    public function setNameUser(string $name_user): self
+    {
+        $this->name_user = $name_user;
+
+        return $this;
+    }
+
+    public function getPictureUser(): ?string
+    {
+        return $this->picture_user;
+    }
+
+    public function setPictureUser(?string $picture_user): self
+    {
+        $this->picture_user = $picture_user;
+
+        return $this;
+    }
+
+    public function getDescriptionUser(): ?string
+    {
+        return $this->description_user;
+    }
+
+    public function setDescriptionUser(?string $description_user): self
+    {
+        $this->description_user = $description_user;
+
+        return $this;
+    }
+
+    public function getCertificationUser(): ?bool
+    {
+        return $this->certification_user;
+    }
+
+    public function setCertificationUser(bool $certification_user): self
+    {
+        $this->certification_user = $certification_user;
+
+        return $this;
+    }
+
+    public function getStatusUser(): ?int
+    {
+        return $this->status_user;
+    }
+
+    public function setStatusUser(int $status_user): self
+    {
+        $this->status_user = $status_user;
+
+        return $this;
+    }
+
+    public function getLabelUser(): ?string
+    {
+        return $this->label_user;
+    }
+
+    public function setLabelUser(?string $label_user): self
+    {
+        $this->label_user = $label_user;
+
+        return $this;
+    }
+
+    public function getSlugUser(): ?string
+    {
+        return $this->slug_user;
+    }
+
+    public function setSlugUser(string $slug_user): self
+    {
+        $this->slug_user = $slug_user;
+
+        return $this;
+    }
+
+    public function getCreatedAtUser(): ?\DateTimeImmutable
+    {
+        return $this->created_at_user;
+    }
+
+    public function setCreatedAtUser(\DateTimeImmutable $created_at_user): self
+    {
+        $this->created_at_user = $created_at_user;
+
+        return $this;
+    }
+
+    public function getUpdatedAtUser(): ?\DateTimeInterface
+    {
+        return $this->updated_at_user;
+    }
+
+    public function setUpdatedAtUser(?\DateTimeInterface $updated_at_user): self
+    {
+        $this->updated_at_user = $updated_at_user;
+
+        return $this;
     }
 
 }

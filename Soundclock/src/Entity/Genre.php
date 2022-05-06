@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GenreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,16 @@ class Genre
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at_genre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Music::class, mappedBy="Genre")
+     */
+    private $music;
+
+    public function __construct()
+    {
+        $this->music = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -138,6 +150,33 @@ class Genre
     public function setUpdatedAtGenre(?\DateTimeInterface $updated_at_genre): self
     {
         $this->updated_at_genre = $updated_at_genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Music>
+     */
+    public function getMusic(): Collection
+    {
+        return $this->music;
+    }
+
+    public function addMusic(Music $music): self
+    {
+        if (!$this->music->contains($music)) {
+            $this->music[] = $music;
+            $music->addGenre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusic(Music $music): self
+    {
+        if ($this->music->removeElement($music)) {
+            $music->removeGenre($this);
+        }
 
         return $this;
     }

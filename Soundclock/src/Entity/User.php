@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -80,6 +82,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at_user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Music::class, mappedBy="user")
+     */
+    private $music;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Playlist::class, mappedBy="user")
+     */
+    private $playlist;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="user")
+     */
+    private $review;
+
+    public function __construct()
+    {
+        $this->music = new ArrayCollection();
+        $this->playlist = new ArrayCollection();
+        $this->review = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -274,6 +298,93 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAtUser(?\DateTimeInterface $updated_at_user): self
     {
         $this->updated_at_user = $updated_at_user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Music>
+     */
+    public function getMusic(): Collection
+    {
+        return $this->music;
+    }
+
+    public function addMusic(Music $music): self
+    {
+        if (!$this->music->contains($music)) {
+            $this->music[] = $music;
+            $music->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusic(Music $music): self
+    {
+        if ($this->music->removeElement($music)) {
+            $music->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Playlist>
+     */
+    public function getPlaylist(): Collection
+    {
+        return $this->playlist;
+    }
+
+    public function addPlaylist(Playlist $playlist): self
+    {
+        if (!$this->playlist->contains($playlist)) {
+            $this->playlist[] = $playlist;
+            $playlist->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylist(Playlist $playlist): self
+    {
+        if ($this->playlist->removeElement($playlist)) {
+            // set the owning side to null (unless already changed)
+            if ($playlist->getUser() === $this) {
+                $playlist->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReview(): Collection
+    {
+        return $this->review;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->review->contains($review)) {
+            $this->review[] = $review;
+            $review->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->review->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
+            }
+        }
 
         return $this;
     }

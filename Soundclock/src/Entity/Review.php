@@ -42,6 +42,16 @@ class Review
      */
     private $updated_at_review;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Music::class, inversedBy="review")
+     */
+    private $music;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="review")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +113,30 @@ class Review
     public function setUpdatedAtReview(?\DateTimeInterface $updated_at_review): self
     {
         $this->updated_at_review = $updated_at_review;
+
+        return $this;
+    }
+
+    public function getMusic(): ?Music
+    {
+        return $this->music;
+    }
+
+    public function setMusic(?Music $music): self
+    {
+        $this->music = $music;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

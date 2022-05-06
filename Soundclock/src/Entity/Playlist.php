@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlaylistRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,21 @@ class Playlist
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at_playlist;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Music::class, mappedBy="playlist")
+     */
+    private $music;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="playlist")
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->music = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +188,45 @@ class Playlist
     public function setUpdatedAtPlaylist(?\DateTimeInterface $updated_at_playlist): self
     {
         $this->updated_at_playlist = $updated_at_playlist;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Music>
+     */
+    public function getMusic(): Collection
+    {
+        return $this->music;
+    }
+
+    public function addMusic(Music $music): self
+    {
+        if (!$this->music->contains($music)) {
+            $this->music[] = $music;
+            $music->addPlaylist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusic(Music $music): self
+    {
+        if ($this->music->removeElement($music)) {
+            $music->removePlaylist($this);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -45,9 +45,9 @@ class Music
     private $status_music;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="date")
      */
-    private $relaesedate_music;
+    private $releasedate_music;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -167,14 +167,14 @@ class Music
         return $this;
     }
 
-    public function getRelaesedateMusic(): ?\DateTimeImmutable
+    public function getReleasedateMusic(): ?\DateTimeInterface
     {
-        return $this->relaesedate_music;
+        return $this->releasedate_music;
     }
 
-    public function setRelaesedateMusic(\DateTimeImmutable $relaesedate_music): self
+    public function setReleasedateMusic(\DateTimeInterface $releasedate_music): self
     {
-        $this->relaesedate_music = $relaesedate_music;
+        $this->releasedate_music = $releasedate_music;
 
         return $this;
     }

@@ -23,6 +23,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # argument pour le service de slug
+    App\Service\MySlugger:
+        arguments:
+            $toLower: '%app.slugger_to_lower%'
     
     App\EventListener\MusicListener:
         tags:

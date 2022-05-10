@@ -205,69 +205,69 @@ class AppFixtures extends Fixture
         }
 
 
-    //     /************* Playlist*************/
+        /************* Playlist*************/
 
-    //     $allPlaylistEntity = [];
+        $allPlaylistEntity = [];
 
-    //     for ($i = 1; $i<= 20; $i++)
-    //     {
-    //         $newPlaylist = new Playlist();
+        for ($i = 1; $i<= 20; $i++)
+        {
+            $newPlaylist = new Playlist();
             
-    //         $newPlaylist->setNamePlaylist($faker->word());
-    //         $newPlaylist->setPicturePlaylist('https://picsum.photos/id/'.mt_rand(1, 100).'/303/424');
-    //         $newPlaylist->setDescriptionPlaylist($faker->realText($maxNbChars = 50, $indexSize = 2));
-    //         $newPlaylist->setAlbum(rand(0,1));
-    //         $newPlaylist->setStatusPlaylist(1);
-    //         $newPlaylist->setNblikePlaylist(rand(1,1000));
+            $newPlaylist->setNamePlaylist($faker->word());
+            $newPlaylist->setPicturePlaylist('https://picsum.photos/id/'.mt_rand(1, 100).'/303/424');
+            $newPlaylist->setDescriptionPlaylist($faker->realText($maxNbChars = 50, $indexSize = 2));
+            $newPlaylist->setAlbum(rand(0,1));
+            $newPlaylist->setStatusPlaylist(1);
+            $newPlaylist->setNblikePlaylist(rand(1,1000));
 
-    //         $playlistSlug = $this->mySlugger->slugify($newPlaylist->getNamePlaylist());
-    //         $newPlaylist->setSlugPlaylist($playlistSlug);
+            $playlistSlug = $this->mySlugger->slugify($newPlaylist->getNamePlaylist());
+            $newPlaylist->setSlugPlaylist($playlistSlug);
 
-    //         $newPlaylist->setCreatedAtPlaylist(new DateTimeImmutable('now'));
+            $newPlaylist->setCreatedAtPlaylist(new DateTimeImmutable('now'));
 
 
-    //         $randomUser = $allUserEntity[mt_rand(0, count($allUserEntity) - 1)];
-    //         $newPlaylist->setUser($randomUser);
+            $randomUser = $allUserEntity[mt_rand(0, count($allUserEntity) - 1)];
+            $newPlaylist->setUser($randomUser);
             
-    //         for ($j = 1; $j<= rand(1, 40); $j++) 
-    //         {
-    //             $randomMusic = $allMusicEntity[mt_rand(0, count($allMusicEntity) - 1)];
-    //             $newPlaylist->addMusic($randomMusic);
-    //         }
+            for ($j = 1; $j<= rand(1, 40); $j++) 
+            {
+                $randomMusic = $allMusicEntity[mt_rand(0, count($allMusicEntity) - 1)];
+                $newPlaylist->addMusic($randomMusic);
+            }
 
-    //         $allPlaylistEntity[] = $newPlaylist;
+            $allPlaylistEntity[] = $newPlaylist;
 
-    //         $manager->persist($newPlaylist);            
-    //     }
+            $manager->persist($newPlaylist);            
+        }
 
 
-    //     /************* Review *************/
+        /************* Review *************/
 
-    //     $allReviewEntity = [];      
+        $allReviewEntity = [];      
 
-    //     for ($i = 1; $i<= 20; $i++) 
-    //     {
+        for ($i = 1; $i<= 20; $i++) 
+        {
             
-    //         $newReview = new Review();
-    //         $newReview->setNameReview($faker->word());
-    //         $newReview->setContentReview($faker->realText($maxNbChars = 100, $indexSize = 2));
-    //         $newReview->setStatusReview(1);
-    //         $newReview->setCreatedAtReview(new DateTimeImmutable('now'));
+            $newReview = new Review();
+            $newReview->setNameReview($faker->word());
+            $newReview->setContentReview($faker->realText($maxNbChars = 100, $indexSize = 2));
+            $newReview->setStatusReview(1);
+            $newReview->setCreatedAtReview(new DateTimeImmutable('now'));
 
-    //         $randomUser = $allUserEntity[mt_rand(0, count($allUserEntity) - 1)];
-    //         $newReview->setUser($randomUser);
-
-
-    //         $randomMusic = $allMusicEntity[mt_rand(0, count($allMusicEntity) - 1)];
-    //         $newReview->setMusic($randomMusic);
-
-    //         $allReviewEntity[] = $newReview;
-
-    //         $manager->persist($newReview);
-    //     }
+            $randomUser = $allUserEntity[mt_rand(0, count($allUserEntity) - 1)];
+            $newReview->setUser($randomUser);
 
 
-    //     /************* Banner *************/ 
+            $randomMusic = $allMusicEntity[mt_rand(0, count($allMusicEntity) - 1)];
+            $newReview->setMusic($randomMusic);
+
+            $allReviewEntity[] = $newReview;
+
+            $manager->persist($newReview);
+        }
+
+
+        /************* Banner *************/ 
 
         for ($i = 1; $i<= 5; $i++) 
         {

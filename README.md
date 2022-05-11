@@ -102,3 +102,12 @@ access_control:
 api_login_check:
     path: /api/login_check
 ```
+
+### Réécriture payload dans service.yaml
+
+```
+acme_api.event.jwt_created_listener:
+        class: App\EventListener\JWTCreatedListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+```

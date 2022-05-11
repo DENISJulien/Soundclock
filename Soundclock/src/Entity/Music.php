@@ -6,6 +6,7 @@ use App\Repository\MusicRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MusicRepository::class)
@@ -16,61 +17,85 @@ class Music
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $name_music;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $file_music;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $picture_music;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $description_music;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $status_music;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $releasedate_music;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $nblike_music;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $nblistened_music;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $slug_music;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $created_at_music;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
      */
     private $updated_at_music;
 

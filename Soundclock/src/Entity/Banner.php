@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BannerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BannerRepository::class)
@@ -14,26 +15,36 @@ class Banner
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_banner"})
+     * @Groups({"show_banner"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_banner"})
+     * @Groups({"show_banner"})
      */
     private $name_banner;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list_banner"})
+     * @Groups({"show_banner"})
      */
     private $status_banner;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"list_banner"})
+     * @Groups({"show_banner"})
      */
     private $created_at_banner;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list_banner"})
+     * @Groups({"show_banner"})
      */
     private $updated_at_banner;
 

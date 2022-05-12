@@ -25,12 +25,12 @@ class ApiGenreController extends AbstractController
     }
 
     /**
-     * @Route("api/genre/{id}", name="api_genre_id", methods={"GET"})
+     * @Route("api/genres/{id}", name="api_genre_id", methods={"GET"})
      */
     public function showGenre(Genre $genre): Response
     {
         if ($genre === null){
-            $error = new JsonError(Response::HTTP_NOT_FOUND, Banner::class . 'non trouvé');
+            $error = new JsonError(Response::HTTP_NOT_FOUND, Genre::class . 'non trouvé');
             return $this->json($error, $error->getError());
         }
 

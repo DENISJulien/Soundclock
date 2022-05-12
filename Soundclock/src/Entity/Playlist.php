@@ -6,6 +6,7 @@ use App\Repository\PlaylistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PlaylistRepository::class)
@@ -16,51 +17,71 @@ class Playlist
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $name_playlist;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $picture_playlist;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $description_playlist;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $album;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $status_playlist;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $nblike_playlist;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $slug_playlist;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $created_at_playlist;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $updated_at_playlist;
 

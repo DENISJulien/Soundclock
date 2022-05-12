@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -19,16 +20,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $roles = [];
 
@@ -40,46 +47,64 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $name_user;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $picture_user;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $description_user;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $certification_user;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $status_user;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $label_user;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $slug_user;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $created_at_user;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $updated_at_user;
 

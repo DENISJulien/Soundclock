@@ -17,6 +17,10 @@ class Genre
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $id;
 
@@ -24,6 +28,8 @@ class Genre
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $name_genre;
 
@@ -31,6 +37,8 @@ class Genre
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $picture_genre;
 
@@ -38,6 +46,8 @@ class Genre
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $description_genre;
 
@@ -45,6 +55,8 @@ class Genre
      * @ORM\Column(type="integer")
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $status_genre;
 
@@ -52,6 +64,8 @@ class Genre
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $slug_genre;
 
@@ -59,6 +73,8 @@ class Genre
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $created_at_genre;
 
@@ -66,6 +82,8 @@ class Genre
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $updated_at_genre;
 

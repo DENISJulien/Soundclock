@@ -19,6 +19,8 @@ class Music
      * @ORM\Column(type="integer")
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $id;
 
@@ -26,6 +28,8 @@ class Music
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $name_music;
 
@@ -33,6 +37,8 @@ class Music
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $file_music;
 
@@ -40,6 +46,8 @@ class Music
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $picture_music;
 
@@ -47,6 +55,8 @@ class Music
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $description_music;
 
@@ -54,6 +64,8 @@ class Music
      * @ORM\Column(type="integer")
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $status_music;
 
@@ -61,6 +73,8 @@ class Music
      * @ORM\Column(type="date")
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $releasedate_music;
 
@@ -68,6 +82,8 @@ class Music
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $nblike_music;
 
@@ -75,6 +91,8 @@ class Music
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $nblistened_music;
 
@@ -82,6 +100,8 @@ class Music
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $slug_music;
 
@@ -89,6 +109,8 @@ class Music
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $created_at_music;
 
@@ -96,26 +118,36 @@ class Music
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $updated_at_music;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="music")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $genre;
 
     /**
      * @ORM\ManyToMany(targetEntity=Playlist::class, inversedBy="music")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $playlist;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="music")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="music")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $review;
 

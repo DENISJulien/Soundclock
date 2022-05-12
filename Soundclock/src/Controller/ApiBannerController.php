@@ -25,7 +25,7 @@ class ApiBannerController extends AbstractController
     }
 
     /**
-     * @Route("/api/banner/{id}", name="api_banner_id", methods={"GET"})
+     * @Route("/api/banners/{id}", name="api_banner_id", methods={"GET"})
      */
     public function showBanner(Banner $banner = null)
     {

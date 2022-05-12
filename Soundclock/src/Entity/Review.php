@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewRepository::class)
@@ -14,31 +15,43 @@ class Review
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $name_review;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $content_review;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $status_review;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $created_at_review;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $updated_at_review;
 

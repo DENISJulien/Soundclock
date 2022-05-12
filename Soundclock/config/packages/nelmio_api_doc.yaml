@@ -44,6 +44,100 @@ nelmio_api_doc:
                                         properties:
                                             token:
                                                 type: string
+        # Entity Banner
+            # Show All Banner                                             
+            /api/banner:
+                get:
+                    summary: Show all Banners
+                    description: Show All Methods
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Banners
+                    # https://swagger.io/docs/specification/describing-parameters/
+
+                    responses:
+                        '200':
+                            description: Show All Methods
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+        
+            # Show One By ID Banner                                             
+            /api/banner/{id}:
+                get:
+                    summary: Show One By ID Banner
+                    description: Show One By ID Methods
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Banner
+                    # https://swagger.io/docs/specification/describing-parameters/
+                    parameters:
+                      - in: path
+                        name: id
+                        schema:
+                            type: integer
+                        required: true
+
+                    responses:
+                        '200':
+                            description: Show One By ID Banner
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+
+        # Entity Genre
+            # Show All Genre
+            /api/genre:
+                get:
+                    summary: Show all Genres
+                    description: Show All Methods
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Genre
+                    # https://swagger.io/docs/specification/describing-parameters/
+
+                    responses:
+                        '200':
+                            description: Show All Methods
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+            
+            # Show One By Id Genre 
+            /api/genre/{id}:
+                get:
+                    summary: Show One By ID Genre
+                    description: Show One By ID Methods
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Genre
+                    # https://swagger.io/docs/specification/describing-parameters/
+                    parameters:
+                      - in: path
+                        name: id
+                        schema:
+                            type: integer
+                        required: true
+
+                    responses:
+                        '200':
+                            description: Show One By ID Genre
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+
     areas: # to filter documented areas
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

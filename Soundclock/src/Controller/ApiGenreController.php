@@ -25,7 +25,7 @@ class ApiGenreController extends AbstractController
     }
 
     /**
-     * @Route("api/genres/{id}", name="api_genre_id", methods={"GET"})
+     * @Route("api/genre/{id}", name="api_genre_id", methods={"GET"})
      */
     public function showGenre(Genre $genre): Response
     {

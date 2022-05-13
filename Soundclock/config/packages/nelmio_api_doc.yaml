@@ -1,8 +1,8 @@
 nelmio_api_doc:
     documentation:
         info:
-            title: My App
-            description: This is an awesome app!
+            title: API DOC Sound'Clock
+            description: Application de partage de musique
             version: 1.0.0
         components:
             securitySchemes:
@@ -66,7 +66,7 @@ nelmio_api_doc:
                                             type: string
         
             # Show One By ID Banner                                             
-            /api/banners/{id}:
+            /api/banner/{id}:
                 get:
                     summary: Show One By ID Banner
                     description: Show One By ID Methods
@@ -113,7 +113,7 @@ nelmio_api_doc:
                                             type: string
             
             # Show One By Id Genre 
-            /api/genres/{id}:
+            /api/genre/{id}:
                 get:
                     summary: Show One By ID Genre
                     description: Show One By ID Methods
@@ -160,7 +160,7 @@ nelmio_api_doc:
                                             type: string
             
             # Show One By Id Music 
-            /api/musics/{id}:
+            /api/music/{id}:
                 get:
                     summary: Show One By ID Music
                     description: Show One By ID Methods
@@ -186,7 +186,7 @@ nelmio_api_doc:
                                             type: string
 
             # Show One By Slug Music 
-            /api/music/{slug_music}:
+            /api/music/slug/{slug_music}:
                 get:
                     summary: Show One By Slug Music
                     description: Show One By Slug Methods
@@ -210,6 +210,67 @@ nelmio_api_doc:
                                         type: array
                                         items: 
                                             type: string
+            
+            # Add Music                                            
+            /api/music/create:
+                post:
+                    summary: Creat Music
+                    description: Creat Method 
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Music
+                    # https://swagger.io/docs/specification/describing-parameters/
+                    requestBody:
+                        description: Multipart-form-data
+                        required: true
+                        content: 
+                            multipart/form-data:
+                                schema:
+                                    type: object
+                                    properties:
+                                        name_music:
+                                            type: string
+                                            description: Nom de la musique.
+                                        description_music:
+                                            type: string
+                                            description: Description de la musique si il y en a une.
+                                        releasedate_music: 
+                                            type: date
+                                            description: Date de création de la musique.
+                                        picture_music:
+                                            type: string
+                                            format: binary
+                                            description: Image/Jaquette de la musique.
+                                        file_music: 
+                                            type: string
+                                            format: binary
+                                            description: Fichier audio de la musique.
+                                        user:
+                                            type: integer
+                                            description: Id du User qui créé la musique.
+
+                    responses:
+                        '200':
+                            description: Creat Music
+                            content:
+                                 multipart/form-data:
+                                    schema: 
+                                        type: object
+                                        properties:
+                                            name_music (Not Null):
+                                                type: string
+                                            description_music (Can Be Null):
+                                                type: string
+                                            releasedate_music (Not Null): 
+                                                type: date
+                                            picture_music (Can Be Null):
+                                                type: string
+                                                format: binary
+                                            file_music (Not Null): 
+                                                type: string
+                                                format: binary
+                                            user (id) (Not Null):
+                                                type: integer
 
     areas: # to filter documented areas
         path_patterns:

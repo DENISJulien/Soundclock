@@ -156,6 +156,11 @@ class Music
      */
     private $musicLikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MusicListen::class, mappedBy="user")
+     */
+    private $musicListens;
+
 
     public function __construct()
     {
@@ -164,6 +169,7 @@ class Music
         $this->user = new ArrayCollection();
         $this->review = new ArrayCollection();
         $this->musicLikes = new ArrayCollection();
+        $this->musicListens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -429,6 +435,36 @@ class Music
             // set the owning side to null (unless already changed)
             if ($musicLike->getUser() === $this) {
                 $musicLike->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MusicListen>
+     */
+    public function getMusicListens(): Collection
+    {
+        return $this->musicListens;
+    }
+
+    public function addMusicListen(MusicListen $musicListen): self
+    {
+        if (!$this->musicListens->contains($musicListen)) {
+            $this->musicListens[] = $musicListen;
+            $musicListen->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicListen(MusicListen $musicListen): self
+    {
+        if ($this->musicListens->removeElement($musicListen)) {
+            // set the owning side to null (unless already changed)
+            if ($musicListen->getUser() === $this) {
+                $musicListen->setUser(null);
             }
         }
 

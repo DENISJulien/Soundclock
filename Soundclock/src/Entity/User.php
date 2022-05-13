@@ -128,12 +128,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $musicLikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MusicListen::class, mappedBy="music")
+     */
+    private $musicListens;
+
     public function __construct()
     {
         $this->music = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->review = new ArrayCollection();
         $this->musicLikes = new ArrayCollection();
+        $this->musicListens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -444,6 +450,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($musicLike->getMusic() === $this) {
                 $musicLike->setMusic(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MusicListen>
+     */
+    public function getMusicListens(): Collection
+    {
+        return $this->musicListens;
+    }
+
+    public function addMusicListen(MusicListen $musicListen): self
+    {
+        if (!$this->musicListens->contains($musicListen)) {
+            $this->musicListens[] = $musicListen;
+            $musicListen->setMusic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicListen(MusicListen $musicListen): self
+    {
+        if ($this->musicListens->removeElement($musicListen)) {
+            // set the owning side to null (unless already changed)
+            if ($musicListen->getMusic() === $this) {
+                $musicListen->setMusic(null);
             }
         }
 

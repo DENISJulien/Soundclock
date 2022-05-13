@@ -151,12 +151,19 @@ class Music
      */
     private $review;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="user")
+     */
+    private $musicLikes;
+
+
     public function __construct()
     {
         $this->genre = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->user = new ArrayCollection();
         $this->review = new ArrayCollection();
+        $this->musicLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -397,4 +404,35 @@ class Music
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, MusicLike>
+     */
+    public function getMusicLikes(): Collection
+    {
+        return $this->musicLikes;
+    }
+
+    public function addMusicLike(MusicLike $musicLike): self
+    {
+        if (!$this->musicLikes->contains($musicLike)) {
+            $this->musicLikes[] = $musicLike;
+            $musicLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicLike(MusicLike $musicLike): self
+    {
+        if ($this->musicLikes->removeElement($musicLike)) {
+            // set the owning side to null (unless already changed)
+            if ($musicLike->getUser() === $this) {
+                $musicLike->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -123,11 +123,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $review;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="music")
+     */
+    private $musicLikes;
+
     public function __construct()
     {
         $this->music = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->review = new ArrayCollection();
+        $this->musicLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -413,5 +419,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, MusicLike>
+     */
+    public function getMusicLikes(): Collection
+    {
+        return $this->musicLikes;
+    }
+
+    public function addMusicLike(MusicLike $musicLike): self
+    {
+        if (!$this->musicLikes->contains($musicLike)) {
+            $this->musicLikes[] = $musicLike;
+            $musicLike->setMusic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicLike(MusicLike $musicLike): self
+    {
+        if ($this->musicLikes->removeElement($musicLike)) {
+            // set the owning side to null (unless already changed)
+            if ($musicLike->getMusic() === $this) {
+                $musicLike->setMusic(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

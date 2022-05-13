@@ -379,6 +379,42 @@ nelmio_api_doc:
                                                 format: binary
                                             status_music:
                                                 type: integer
+            # Like Music
+            /api/music/like:
+                post:
+                    summary: Like Music
+                    description: Like Method 
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Music
+                    # https://swagger.io/docs/specification/describing-parameters/
+                    requestBody:
+                        description: application/json
+                        required: true
+                        content: 
+                            multipart/form-data:
+                                schema:
+                                    type: object
+                                    properties:
+                                        music:
+                                            type: interger
+                                            description: Id Music
+                                        user:
+                                            type: integer
+                                            description: Id User
+
+                    # responses:
+                    #     '200':
+                    #         description: Like Music
+                    #         content:
+                    #                 multipart/form-data:
+                    #                 schema: 
+                    #                     type: object
+                    #                     properties:
+                    #                         music:
+                    #                             type: integer
+                    #                         user:
+                    #                             type: integer
                                             
 
     areas: # to filter documented areas

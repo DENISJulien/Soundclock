@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Music;
+use App\Entity\MusicLike;
+use App\Entity\User;
 use App\Models\JsonError;
+use App\Repository\MusicLikeRepository;
 use App\Repository\MusicRepository;
 use App\Repository\UserRepository;
 use DateTime;
@@ -241,6 +244,29 @@ class ApiMusicController extends AbstractController
             200,
             [],
             ['groups'=> ['list_music']]
+        );
+    }
+
+    /**
+     * @Route("/api/music/like", name="api_music_like_by_user", methods={"POST"})
+     */
+    public function musicLiked(User $user,Music $music, EntityManagerInterface $entityManager,MusicRepository $musicRepository, Request $request,UserRepository $userRepository){
+    
+        $like = new MusicLike();
+        
+        $like->setUser($request->request->get('user'));
+        
+        $like->setMusic($request->request->get('music'));
+
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+        return $this->json(
+            $like,
+            200,
+            [],
+            ['groups' => ['show_like_music']]
+
         );
     }
 

@@ -126,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="music")
      */
-    private $musicLikes;
+    private $userLikes;
 
     /**
      * @ORM\OneToMany(targetEntity=MusicListen::class, mappedBy="music")
@@ -138,7 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->music = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->review = new ArrayCollection();
-        $this->musicLikes = new ArrayCollection();
+        $this->userLikes = new ArrayCollection();
         $this->musicListens = new ArrayCollection();
     }
 
@@ -427,29 +427,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, MusicLike>
+     * @return Collection<int, UserLike>
      */
-    public function getMusicLikes(): Collection
+    public function getUserLikes(): Collection
     {
-        return $this->musicLikes;
+        return $this->userLikes;
     }
 
-    public function addMusicLike(MusicLike $musicLike): self
+    public function addUserLike(MusicLike $userLike): self
     {
-        if (!$this->musicLikes->contains($musicLike)) {
-            $this->musicLikes[] = $musicLike;
-            $musicLike->setMusic($this);
+        if (!$this->userLikes->contains($userLike)) {
+            $this->userLikes[] = $userLike;
+            $userLike->setMusic($this);
         }
 
         return $this;
     }
 
-    public function removeMusicLike(MusicLike $musicLike): self
+    public function removeUserLike(MusicLike $userLike): self
     {
-        if ($this->musicLikes->removeElement($musicLike)) {
+        if ($this->userLikes->removeElement($userLike)) {
             // set the owning side to null (unless already changed)
-            if ($musicLike->getMusic() === $this) {
-                $musicLike->setMusic(null);
+            if ($userLike->getMusic() === $this) {
+                $userLike->setMusic(null);
             }
         }
 

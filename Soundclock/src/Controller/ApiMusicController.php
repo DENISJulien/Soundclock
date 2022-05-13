@@ -140,4 +140,108 @@ class ApiMusicController extends AbstractController
         );
     }
 
+    /**
+     * @Route("/api/music/edit/{id}", name="api_music_edit", methods={"POST"})
+     */
+    public function updateMusic(EntityManagerInterface $entityManager, Music $music, Request $request,ValidatorInterface $validator)
+    {        
+        // dd($request);
+        if ($request->request->get('name_music')!== null) {
+            $music->setNameMusic($request->request->get('name_music'));
+        }
+        if ($request->request->get('description_music')!== null) {
+            $music->setDescriptionMusic($request->request->get('description_music'));
+        }
+        if ($request->request->get('releasedate_music')!== null) {
+            $date = new DateTime($request->request->get('releasedate_music'));
+            $music->setReleasedateMusic($date);
+        }
+        if ($request->request->get('status_music')!== null) {
+            $music->setStatusMusic($request->request->get('status_music'));
+        }
+        $music->setUpdatedAtMusic(new DateTime('now'));
+
+        if ($request->files!== null) {
+
+            $upload = $request->files;
+            // dd ($upload);
+            foreach ($upload as $key => $uploadFile)
+            {
+                $uploadedName = md5(uniqid()) . '.' . $uploadFile->guessExtension();
+                
+                if($key === 'picture_music'){
+                    $errors = $validator->validate($uploadFile, new Image([]));
+                    if (count($errors) > 0) {
+
+                        $myJsonError = new JsonError(Response::HTTP_UNPROCESSABLE_ENTITY, "Des erreurs de validation ont été trouvées");
+                        $myJsonError->setValidationErrors($errors);
+                
+                        return $this->json($myJsonError, $myJsonError->getError());
+                    }
+                } else {
+                    // dd($validator->validate($uploadFile, new File(['mimeTypes' => 'audio/*'])));
+                    $errors = $validator->validate($uploadFile, new File(['mimeTypes' => 'audio/*']));
+                    if (count($errors) > 0) {
+
+                        $myJsonError = new JsonError(Response::HTTP_UNPROCESSABLE_ENTITY, "Des erreurs de validation ont été trouvées");
+                        $myJsonError->setValidationErrors($errors);
+                
+                        return $this->json($myJsonError, $myJsonError->getError());
+                    }
+                }
+
+                $uploadFile->move(
+                    $this->getParameter('upload_directory'),
+                    $uploadedName
+                );
+                if($key === 'picture_music'){
+                    $music->setPictureMusic($uploadedName);
+                } else {
+                    $music->setFileMusic($uploadedName);
+                }
+            }
+        }
+        
+        $entityManager->persist($music);
+        $entityManager->flush();
+
+        return $this->json(
+            [],
+            201,
+            [],
+            ['groups' => ['show_music']]
+        );
+    }
+
+    /**
+     * @Route("/api/music/top10/like", name="api_music_top10_like", methods={"GET"})
+     */
+    public function listTop10ByLike(MusicRepository $musicRepository): Response
+    {
+        $top10ByLike = $musicRepository->findTop10ByLike();
+        // dd($top10ByLike);
+
+        return $this->json(
+            $top10ByLike,
+            200,
+            [],
+            ['groups'=> ['list_music']]
+        );
+    }
+
+    /**
+     * @Route("/api/music/top10/listened", name="api_music_top10_listened", methods={"GET"})
+     */
+    public function listTop10ByListened(MusicRepository $musicRepository): Response
+    {
+        $top10ByListened = $musicRepository->findTop10ByListened();
+
+        return $this->json(
+            $top10ByListened,
+            200,
+            [],
+            ['groups'=> ['list_music']]
+        );
+    }
+
 }

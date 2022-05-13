@@ -139,6 +139,7 @@ nelmio_api_doc:
                                             type: string
         
         # Entity Music
+        # Routes Music GET
             # Show All Music
             /api/music:
                 get:
@@ -210,7 +211,48 @@ nelmio_api_doc:
                                         type: array
                                         items: 
                                             type: string
-            
+                            
+            # Show TOP10 Music Liked
+            /api/music/top10/like:
+                get:
+                    summary: Show TOP10 Music Liked
+                    description: Show TOP10 Music Liked Methods
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Music
+                    # https://swagger.io/docs/specification/describing-parameters/
+
+                    responses:
+                        '200':
+                            description: Show TOP10 Music Liked
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+                            
+            # Show TOP10 Music Listened
+            /api/music/top10/listened:
+                get:
+                    summary: Show TOP10 Music Listened
+                    description: Show TOP10 Music Listened
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Music
+                    # https://swagger.io/docs/specification/describing-parameters/
+
+                    responses:
+                        '200':
+                            description: Show TOP10 Music Listened
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+
+        # Routes Music POST  
             # Add Music                                            
             /api/music/create:
                 post:
@@ -248,6 +290,11 @@ nelmio_api_doc:
                                         user:
                                             type: integer
                                             description: Id du User qui créé la musique.
+                                    required:
+                                        - name_music
+                                        - releasedate_music
+                                        - file_music
+                                        - user
 
                     responses:
                         '200':
@@ -271,6 +318,68 @@ nelmio_api_doc:
                                                 format: binary
                                             user (id) (Not Null):
                                                 type: integer
+
+            # Edit Music                                            
+            /api/music/edit/{id}:
+                post:
+                    summary: Edit Music
+                    description: Edit Method 
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Music
+                    # https://swagger.io/docs/specification/describing-parameters/
+                    requestBody:
+                        description: Multipart-form-data
+                        required: true
+                        content: 
+                            multipart/form-data:
+                                schema:
+                                    type: object
+                                    properties:
+                                        name_music:
+                                            type: string
+                                            description: Nom de la musique.
+                                        description_music:
+                                            type: string
+                                            description: Description de la musique si il y en a une.
+                                        releasedate_music: 
+                                            type: date
+                                            description: Date de création de la musique.
+                                        picture_music:
+                                            type: string
+                                            format: binary
+                                            description: Image/Jaquette de la musique.
+                                        file_music: 
+                                            type: string
+                                            format: binary
+                                            description: Fichier audio de la musique.
+                                        status_music:
+                                            type: integer
+                                            description: Status 1, Musique active / Status 2, Musique désactiver, seul le propriétaire de la musique ou un user avec le ROLE_ADMIN peut voir cette musique dans le profil du user conserné.
+
+                    responses:
+                        '200':
+                            description: Creat Music
+                            content:
+                                 multipart/form-data:
+                                    schema: 
+                                        type: object
+                                        properties:
+                                            name_music:
+                                                type: string
+                                            description_music:
+                                                type: string
+                                            releasedate_music: 
+                                                type: date
+                                            picture_music:
+                                                type: string
+                                                format: binary
+                                            file_music: 
+                                                type: string
+                                                format: binary
+                                            status_music:
+                                                type: integer
+                                            
 
     areas: # to filter documented areas
         path_patterns:

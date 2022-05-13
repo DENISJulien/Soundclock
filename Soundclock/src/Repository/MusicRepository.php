@@ -47,6 +47,30 @@ class MusicRepository extends ServiceEntityRepository
         }
     }
 
+    public function findTop10ByLike()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+        SELECT * FROM music
+        ORDER by nblike_music DESC LIMIT 10";
+
+        $results = $conn->executeQuery($sql);
+        return $results->fetchAllAssociative();
+    }
+
+    public function findTop10ByListened()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+        SELECT * FROM music
+        ORDER by nblistened_music DESC LIMIT 10";
+
+        $results = $conn->executeQuery($sql);
+        return $results->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Music[] Returns an array of Music objects
 //     */

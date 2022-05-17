@@ -264,39 +264,46 @@ class ApiMusicController extends AbstractController
      */
     public function musicLiked(Music $music, EntityManagerInterface $entityManager,MusicLikeRepository $musicLikeRepository){
 
-        $like = new MusicLike();
+        $user = $this->getUser();
 
-        if ($this->getUser() !== null){
-            $like->setMusicLiked($music);
+        if (!$user) return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ],
+        403);
 
-            $like->setUserWhoLikeMusic($this->getUser());
-    
-            $entityManager->persist($like);
+        if($music->isLikedByUser($user)) {
+            $like = $musicLikeRepository->findOneBy([
+                'musicLiked' => $music,
+                'userWhoLikeMusic' => $user
+            ]);
+
+            $entityManager->remove($like);
             $entityManager->flush();
+
+            return $this->json([
+                'nbLikeMusic' => $musicLikeRepository->count(['musicLiked' => $music])],
+            200,
+            );
         }
-
         
+        $like = new MusicLike();
+    
+        $like->setMusicLiked($music);
 
+        $like->setUserWhoLikeMusic($user);
+
+        $entityManager->persist($like);
+        $entityManager->flush();
+        
         return $this->json(
             [$like,
-            'nbLikes' => $musicLikeRepository->count(['musicLiked' => $music])],
+            'nbLikeMusic' => $musicLikeRepository->count(['musicLiked' => $music])],
             200,
             [],
             ['groups' => ['show_music_like']]
 
         );
     }
-
-    // /**
-    //  * @Route("/api/music/{id}/like", name="api_music_total_music_like", methods={"GET"})
-    //  */
-    // public function totalMusicLiked(Music $music,MusicLike $musicLike, MusicLikeRepository $musicLikeRepository){
-    
-    // return $this->json(
-    //     ['nbLikes' => $musicLikeRepository->count(['musicLiked' => $music]) ],
-    //     200,
-    // );
-    
-    // }
 
 }

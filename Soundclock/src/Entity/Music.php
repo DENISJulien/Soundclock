@@ -440,4 +440,13 @@ class Music
         return $this;
     }
 
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->musicLikes as $like){
+            if ($like->getUserWhoLikeMusic() === $user) return true;
+        }
+
+        return false;
+    }
+
 }

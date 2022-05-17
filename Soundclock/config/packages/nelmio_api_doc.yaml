@@ -381,6 +381,13 @@ nelmio_api_doc:
                                                 type: integer
             # Like Music
             /api/secure/music/{id}/like:
+                get:
+                    summary: NB Like Music
+                    description: Like Method 
+                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
+                    tags:
+                        - Sound'Clock API Music
+                    # https://swagger.io/docs/specification/describing-parameters/
                 post:
                     summary: Like Music
                     description: Like Method 

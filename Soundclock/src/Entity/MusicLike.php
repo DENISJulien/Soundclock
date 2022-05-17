@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MusicLikeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -15,51 +17,50 @@ class MusicLike
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"list_music"})
-     * @Groups({"show_music"})
+     * @Groups({"list_music_like"})
+     * @Groups({"show_music_like"})
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userLikes")
-     * @Groups({"list_music"})
-     * @Groups({"show_music"})
+     * @ORM\ManyToOne(targetEntity=Music::class, inversedBy="musicLikes")
+     * @Groups({"list_music_like"})
+     * @Groups({"show_music_like"})
      */
-    private $music;
+    private $musicLiked;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Music::class, inversedBy="musicLikes")
-     * @Groups({"list_music"})
-     * @Groups({"show_music"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="musicLikeByUser")
      */
-    private $user;
+    private $userWhoLikeMusic;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMusic(): ?User
+    public function getMusicLiked(): ?Music
     {
-        return $this->music;
+        return $this->musicLiked;
     }
 
-    public function setMusic(?User $music): self
+    public function setMusicLiked(?Music $musicLiked): self
     {
-        $this->music = $music;
+        $this->musicLiked = $musicLiked;
 
         return $this;
     }
 
-    public function getUser(): ?Music
+    public function getUserWhoLikeMusic(): ?User
     {
-        return $this->user;
+        return $this->userWhoLikeMusic;
     }
 
-    public function setUser(?Music $user): self
+    public function setUserWhoLikeMusic(?User $userWhoLikeMusic): self
     {
-        $this->user = $user;
+        $this->userWhoLikeMusic = $userWhoLikeMusic;
 
         return $this;
     }
+
 }

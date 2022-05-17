@@ -21,6 +21,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_music_like"})
+     * @Groups({"show_music_like"})
      */
     private $id;
 
@@ -152,14 +154,12 @@ class Music
     private $review;
 
     /**
-     * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="musicLiked")
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
      */
     private $musicLikes;
 
-    /**
-     * @ORM\OneToMany(targetEntity=MusicListen::class, mappedBy="user")
-     */
-    private $musicListens;
 
 
     public function __construct()
@@ -169,7 +169,6 @@ class Music
         $this->user = new ArrayCollection();
         $this->review = new ArrayCollection();
         $this->musicLikes = new ArrayCollection();
-        $this->musicListens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -423,7 +422,7 @@ class Music
     {
         if (!$this->musicLikes->contains($musicLike)) {
             $this->musicLikes[] = $musicLike;
-            $musicLike->setUser($this);
+            $musicLike->setMusicLiked($this);
         }
 
         return $this;
@@ -433,51 +432,12 @@ class Music
     {
         if ($this->musicLikes->removeElement($musicLike)) {
             // set the owning side to null (unless already changed)
-            if ($musicLike->getUser() === $this) {
-                $musicLike->setUser(null);
+            if ($musicLike->getMusicLiked() === $this) {
+                $musicLike->setMusicLiked(null);
             }
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, MusicListen>
-     */
-    public function getMusicListens(): Collection
-    {
-        return $this->musicListens;
-    }
-
-    public function addMusicListen(MusicListen $musicListen): self
-    {
-        if (!$this->musicListens->contains($musicListen)) {
-            $this->musicListens[] = $musicListen;
-            $musicListen->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMusicListen(MusicListen $musicListen): self
-    {
-        if ($this->musicListens->removeElement($musicListen)) {
-            // set the owning side to null (unless already changed)
-            if ($musicListen->getUser() === $this) {
-                $musicListen->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function isLikedByUser(User $user): bool
-    {
-        foreach ($this->musicLikes as $like){
-            if ($like->getUser() === $user) return true;
-        }
-
-        return false;
     }
 
 }

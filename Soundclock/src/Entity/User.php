@@ -22,6 +22,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="integer")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_music_like"})
+     * @Groups({"show_music_like"})
      */
     private $id;
 
@@ -124,22 +126,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $review;
 
     /**
-     * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="music")
+     * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="userWhoLikeMusic")
      */
-    private $userLikes;
+    private $musicLikeByUser;
 
-    /**
-     * @ORM\OneToMany(targetEntity=MusicListen::class, mappedBy="music")
-     */
-    private $musicListens;
 
     public function __construct()
     {
         $this->music = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->review = new ArrayCollection();
-        $this->userLikes = new ArrayCollection();
-        $this->musicListens = new ArrayCollection();
+        $this->musicLikeByUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -427,64 +424,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, UserLike>
+     * @return Collection<int, MusicLike>
      */
-    public function getUserLikes(): Collection
+    public function getMusicLikeByUser(): Collection
     {
-        return $this->userLikes;
+        return $this->musicLikeByUser;
     }
 
-    public function addUserLike(MusicLike $userLike): self
+    public function addMusicLikeByUser(MusicLike $musicLikeByUser): self
     {
-        if (!$this->userLikes->contains($userLike)) {
-            $this->userLikes[] = $userLike;
-            $userLike->setMusic($this);
+        if (!$this->musicLikeByUser->contains($musicLikeByUser)) {
+            $this->musicLikeByUser[] = $musicLikeByUser;
+            $musicLikeByUser->setUserWhoLikeMusic($this);
         }
 
         return $this;
     }
 
-    public function removeUserLike(MusicLike $userLike): self
+    public function removeMusicLikeByUser(MusicLike $musicLikeByUser): self
     {
-        if ($this->userLikes->removeElement($userLike)) {
+        if ($this->musicLikeByUser->removeElement($musicLikeByUser)) {
             // set the owning side to null (unless already changed)
-            if ($userLike->getMusic() === $this) {
-                $userLike->setMusic(null);
+            if ($musicLikeByUser->getUserWhoLikeMusic() === $this) {
+                $musicLikeByUser->setUserWhoLikeMusic(null);
             }
         }
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, MusicListen>
-     */
-    public function getMusicListens(): Collection
-    {
-        return $this->musicListens;
-    }
-
-    public function addMusicListen(MusicListen $musicListen): self
-    {
-        if (!$this->musicListens->contains($musicListen)) {
-            $this->musicListens[] = $musicListen;
-            $musicListen->setMusic($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMusicListen(MusicListen $musicListen): self
-    {
-        if ($this->musicListens->removeElement($musicListen)) {
-            // set the owning side to null (unless already changed)
-            if ($musicListen->getMusic() === $this) {
-                $musicListen->setMusic(null);
-            }
-        }
-
-        return $this;
-    }
-
 
 }

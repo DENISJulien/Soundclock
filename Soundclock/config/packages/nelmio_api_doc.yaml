@@ -254,7 +254,7 @@ nelmio_api_doc:
 
         # Routes Music POST  
             # Add Music                                            
-            /api/music/create:
+            /api/secure/music/create:
                 post:
                     summary: Creat Music
                     description: Creat Method 
@@ -320,7 +320,7 @@ nelmio_api_doc:
                                                 type: integer
 
             # Edit Music                                            
-            /api/music/edit/{id}:
+            /api/secure/music/edit/{id}:
                 post:
                     summary: Edit Music
                     description: Edit Method 
@@ -380,7 +380,7 @@ nelmio_api_doc:
                                             status_music:
                                                 type: integer
             # Like Music
-            /api/music/like:
+            /api/secure/music/{id}/like:
                 post:
                     summary: Like Music
                     description: Like Method 
@@ -388,34 +388,7 @@ nelmio_api_doc:
                     tags:
                         - Sound'Clock API Music
                     # https://swagger.io/docs/specification/describing-parameters/
-                    requestBody:
-                        description: application/json
-                        required: true
-                        content: 
-                            multipart/form-data:
-                                schema:
-                                    type: object
-                                    properties:
-                                        music:
-                                            type: interger
-                                            description: Id Music
-                                        user:
-                                            type: integer
-                                            description: Id User
 
-                    # responses:
-                    #     '200':
-                    #         description: Like Music
-                    #         content:
-                    #                 multipart/form-data:
-                    #                 schema: 
-                    #                     type: object
-                    #                     properties:
-                    #                         music:
-                    #                             type: integer
-                    #                         user:
-                    #                             type: integer
-                                            
 
     areas: # to filter documented areas
         path_patterns:

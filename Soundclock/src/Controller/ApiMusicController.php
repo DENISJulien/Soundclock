@@ -12,17 +12,29 @@ use App\Repository\UserRepository;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiMusicController extends AbstractController
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+       $this->security = $security;
+    }
+
     /**
      * @Route("/api/music", name="api_music", methods={"GET"})
      */
@@ -74,7 +86,7 @@ class ApiMusicController extends AbstractController
 
     /**
     *
-    * @Route("/api/music/create", name="api_music_create", methods={"POST"})
+    * @Route("/api/secure/music/create", name="api_music_create", methods={"POST"})
     */
     public function createMusic(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator, UserRepository $userRepository)
     {        
@@ -144,7 +156,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
-     * @Route("/api/music/edit/{id}", name="api_music_edit", methods={"POST"})
+     * @Route("/api/secure/music/edit/{id}", name="api_music_edit", methods={"POST"})
      */
     public function updateMusic(EntityManagerInterface $entityManager, Music $music, Request $request,ValidatorInterface $validator)
     {        
@@ -248,31 +260,43 @@ class ApiMusicController extends AbstractController
     }
 
     /**
-     * @Route("/api/music/{id}/like", name="api_music_like_by_user", methods={"POST"})
+     * @Route("/api/secure/music/{id}/like", name="api_music_like_by_user", methods={"GET","POST"})
      */
-    public function musicLiked(User $user,Music $music, EntityManagerInterface $entityManager,MusicRepository $musicRepository, Request $request,UserRepository $userRepository){
+    public function musicLiked(Music $music, EntityManagerInterface $entityManager,MusicLikeRepository $musicLikeRepository){
 
-        // $like = new MusicLike();
+        $like = new MusicLike();
+
+        if ($this->getUser() !== null){
+            $like->setMusicLiked($music);
+
+            $like->setUserWhoLikeMusic($this->getUser());
+    
+            $entityManager->persist($like);
+            $entityManager->flush();
+        }
+
         
-        // $like->setUser($request->request->get('user'));
-        
-        // $like->setMusic($request->request->get('music'));
-
-        $trueUser = $userRepository->find($request->request->get('user'));
-
-        // dd($user);
-        $music->addUser($trueUser);
-
-        $entityManager->persist($music);
-        $entityManager->flush();
 
         return $this->json(
-            $music,
+            [$like,
+            'nbLikes' => $musicLikeRepository->count(['musicLiked' => $music])],
             200,
             [],
-            ['groups' => ['show_like_music']]
+            ['groups' => ['show_music_like']]
 
         );
     }
+
+    // /**
+    //  * @Route("/api/music/{id}/like", name="api_music_total_music_like", methods={"GET"})
+    //  */
+    // public function totalMusicLiked(Music $music,MusicLike $musicLike, MusicLikeRepository $musicLikeRepository){
+    
+    // return $this->json(
+    //     ['nbLikes' => $musicLikeRepository->count(['musicLiked' => $music]) ],
+    //     200,
+    // );
+    
+    // }
 
 }

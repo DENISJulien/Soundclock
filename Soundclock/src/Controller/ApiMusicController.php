@@ -248,21 +248,26 @@ class ApiMusicController extends AbstractController
     }
 
     /**
-     * @Route("/api/music/like", name="api_music_like_by_user", methods={"POST"})
+     * @Route("/api/music/{id}/like", name="api_music_like_by_user", methods={"POST"})
      */
     public function musicLiked(User $user,Music $music, EntityManagerInterface $entityManager,MusicRepository $musicRepository, Request $request,UserRepository $userRepository){
-    
-        $like = new MusicLike();
-        
-        $like->setUser($request->request->get('user'));
-        
-        $like->setMusic($request->request->get('music'));
 
-        $entityManager->persist($like);
+        // $like = new MusicLike();
+        
+        // $like->setUser($request->request->get('user'));
+        
+        // $like->setMusic($request->request->get('music'));
+
+        $trueUser = $userRepository->find($request->request->get('user'));
+
+        // dd($user);
+        $music->addUser($trueUser);
+
+        $entityManager->persist($music);
         $entityManager->flush();
 
         return $this->json(
-            $like,
+            $music,
             200,
             [],
             ['groups' => ['show_like_music']]

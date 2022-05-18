@@ -365,7 +365,7 @@ class ApiMusicController extends AbstractController
     // }
 
     /**
-     * @Route("/api/user/{userWhoLikeMusic}/like", name="api_show_user_like", methods={"POST"})
+     * @Route("/api/user/like", name="api_show_user_like", methods={"POST"})
      */
     public function musicLikedByUser(MusicLikeRepository $musicLikeRepository,Request $request){
 

@@ -348,11 +348,38 @@ class ApiMusicController extends AbstractController
         );
     }
 
-    // /**
-    //  * 
-    //  */
-    // public function showMusicLikeByUser(){
 
+    // /**
+    //  * @Route("/api/user/{userWhoLikeMusic}", name="api_show_user_like", methods={"GET"})
+    //  */
+    // public function musicLikedByUser(MusicLike $musicLike){
+
+        
+
+    //     return $this->json(
+    //         $musicLike,
+    //         200,
+    //         [],
+    //         ['groups' => ['show_music_like']]
+    //     );
     // }
+
+    /**
+     * @Route("/api/user/{userWhoLikeMusic}/like", name="api_show_user_like", methods={"POST"})
+     */
+    public function musicLikedByUser(MusicLikeRepository $musicLikeRepository,Request $request){
+
+        $userWhoLikeMusic = $request->getcontent();
+        $userWhoLikeMusicDecoded = json_decode($userWhoLikeMusic);
+        // dd ($filterDecoded);
+        $userWhoLikeMusicResult = $userWhoLikeMusicDecoded->idUserWhoLikeMusic;
+
+        return $this->json(
+            $musicLikeRepository->findAllMusicLikedByUser($userWhoLikeMusicResult),
+            200,
+            [],
+            ['groups' => ['show_music_like','show_music']]
+        );
+    }
 
 }

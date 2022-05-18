@@ -47,6 +47,19 @@ class MusicLikeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllMusicLikedByUser($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+        SELECT *
+        FROM music_like
+        WHERE user_who_like_music_id = '$id' ";
+
+        $results = $conn->executeQuery($sql);
+        return $results->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return MusicLike[] Returns an array of MusicLike objects
 //     */

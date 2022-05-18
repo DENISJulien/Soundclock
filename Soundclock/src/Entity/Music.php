@@ -21,10 +21,6 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
-     * @Groups({"list_music_like"})
-     * @Groups({"show_music_like"})
-     * @Groups({"list_music_dislike"})
-     * @Groups({"show_music_dislike"})
      */
     private $id;
 
@@ -157,8 +153,6 @@ class Music
 
     /**
      * @ORM\OneToMany(targetEntity=MusicLike::class, mappedBy="musicLiked")
-     * @Groups({"list_music"})
-     * @Groups({"show_music"})
      */
     private $musicLikes;
 
@@ -490,7 +484,7 @@ class Music
     public function isDislikedByUser(User $user): bool
     {
         foreach ($this->musicDislikes as $dislike){
-            if ($dislike->getUserWhoDislikeMusic() === $user) return true;
+            if ($dislike->getUserWhoDisLikeMusic() === $user) return true;
         }
 
         return false;

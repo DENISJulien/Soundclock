@@ -20,17 +20,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
-     * @Groups({"list_music_like"})
-     * @Groups({"show_music_like"})
-     * @Groups({"list_music_dislike"})
-     * @Groups({"show_music_dislike"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -38,6 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -51,6 +53,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -58,6 +62,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -65,6 +71,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -72,6 +80,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -79,6 +89,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -86,6 +98,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -93,6 +107,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -100,6 +116,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */
@@ -107,6 +125,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
      */

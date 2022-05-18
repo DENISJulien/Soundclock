@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Music;
+use App\Entity\MusicDislike;
 use App\Entity\MusicLike;
 use App\Entity\User;
 use App\Models\JsonError;
+use App\Repository\MusicDislikeRepository;
 use App\Repository\MusicLikeRepository;
 use App\Repository\MusicRepository;
 use App\Repository\UserRepository;
@@ -28,12 +30,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiMusicController extends AbstractController
 {
-    private $security;
-
-    public function __construct(Security $security)
-    {
-       $this->security = $security;
-    }
 
     /**
      * @Route("/api/music", name="api_music", methods={"GET"})
@@ -305,5 +301,58 @@ class ApiMusicController extends AbstractController
 
         );
     }
+
+    /**
+     * @Route("/api/secure/music/{id}/dislike", name="api_music_dislike_by_user", methods={"GET","POST"})
+     */
+    public function musicDisliked(Music $music, EntityManagerInterface $entityManager,MusicDislikeRepository $musicDislikeRepository){
+
+        $user = $this->getUser();
+
+        if (!$user) return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ],
+        403);
+
+        if($music->isDislikedByUser($user)) {
+            $dislike = $musicDislikeRepository->findOneBy([
+                'musicDisliked' => $music,
+                'userWhoDislikeMusic' => $user
+            ]);
+
+            $entityManager->remove($dislike);
+            $entityManager->flush();
+
+            return $this->json([
+                'nbDislikeMusic' => $musicDislikeRepository->count(['musicDisliked' => $music])],
+            200,
+            );
+        }
+        
+        $dislike = new MusicDislike();
+    
+        $dislike->setMusicDisliked($music);
+
+        $dislike->setUserWhoDislikeMusic($user);
+
+        $entityManager->persist($dislike);
+        $entityManager->flush();
+        
+        return $this->json(
+            [$dislike,
+            'nbDislikeMusic' => $musicDislikeRepository->count(['musicDisliked' => $music])],
+            200,
+            [],
+            ['groups' => ['show_music_dislike']]
+        );
+    }
+
+    // /**
+    //  * 
+    //  */
+    // public function showMusicLikeByUser(){
+
+    // }
 
 }

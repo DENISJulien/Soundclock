@@ -50,10 +50,8 @@ nelmio_api_doc:
                 get:
                     summary: Show all Banner
                     description: Show All Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Banner
-                    # https://swagger.io/docs/specification/describing-parameters/
 
                     responses:
                         '200':
@@ -70,10 +68,8 @@ nelmio_api_doc:
                 get:
                     summary: Show One By ID Banner
                     description: Show One By ID Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Banner
-                    # https://swagger.io/docs/specification/describing-parameters/
                     parameters:
                       - in: path
                         name: id
@@ -97,10 +93,8 @@ nelmio_api_doc:
                 get:
                     summary: Show all Genres
                     description: Show All Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Genre
-                    # https://swagger.io/docs/specification/describing-parameters/
 
                     responses:
                         '200':
@@ -117,10 +111,8 @@ nelmio_api_doc:
                 get:
                     summary: Show One By ID Genre
                     description: Show One By ID Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Genre
-                    # https://swagger.io/docs/specification/describing-parameters/
                     parameters:
                       - in: path
                         name: id
@@ -145,10 +137,8 @@ nelmio_api_doc:
                 get:
                     summary: Show all Music
                     description: Show All Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
 
                     responses:
                         '200':
@@ -165,10 +155,8 @@ nelmio_api_doc:
                 get:
                     summary: Show One By ID Music
                     description: Show One By ID Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
                     parameters:
                       - in: path
                         name: id
@@ -191,10 +179,8 @@ nelmio_api_doc:
                 get:
                     summary: Show One By Slug Music
                     description: Show One By Slug Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
                     parameters:
                       - in: path
                         name: slug_music
@@ -217,10 +203,8 @@ nelmio_api_doc:
                 get:
                     summary: Show TOP10 Music Liked
                     description: Show TOP10 Music Liked Methods
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
 
                     responses:
                         '200':
@@ -237,10 +221,8 @@ nelmio_api_doc:
                 get:
                     summary: Show TOP10 Music Listened
                     description: Show TOP10 Music Listened
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
 
                     responses:
                         '200':
@@ -258,10 +240,8 @@ nelmio_api_doc:
                 post:
                     summary: Creat Music
                     description: Creat Method 
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
                     requestBody:
                         description: Multipart-form-data
                         required: true
@@ -324,10 +304,8 @@ nelmio_api_doc:
                 post:
                     summary: Edit Music
                     description: Edit Method 
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
                     requestBody:
                         description: Multipart-form-data
                         required: true
@@ -379,23 +357,32 @@ nelmio_api_doc:
                                                 format: binary
                                             status_music:
                                                 type: integer
-            # Like Music
+            
+        # Like Music
             /api/secure/music/{id}/like:
                 get:
                     summary: NB Like Music
                     description: Like Method 
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
                 post:
                     summary: Like Music
                     description: Like Method 
-                    # https://swagger.io/docs/specification/grouping-operations-with-tags/
                     tags:
                         - Sound'Clock API Music
-                    # https://swagger.io/docs/specification/describing-parameters/
 
+        # Dislike Music
+            /api/secure/music/{id}/dislike:
+                get:
+                    summary: NB Dislike Music
+                    description: Dislike Method 
+                    tags:
+                        - Sound'Clock API Music
+                post:
+                    summary: Dislike Music
+                    description: Dislike Method  
+                    tags:
+                        - Sound'Clock API Music
 
     areas: # to filter documented areas
         path_patterns:

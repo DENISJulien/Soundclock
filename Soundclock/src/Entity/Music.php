@@ -23,6 +23,8 @@ class Music
      * @Groups({"show_music"})
      * @Groups({"list_music_like"})
      * @Groups({"show_music_like"})
+     * @Groups({"list_music_dislike"})
+     * @Groups({"show_music_dislike"})
      */
     private $id;
 
@@ -160,6 +162,11 @@ class Music
      */
     private $musicLikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MusicDislike::class, mappedBy="musicDisliked")
+     */
+    private $musicDislikes;
+
 
 
     public function __construct()
@@ -169,6 +176,7 @@ class Music
         $this->user = new ArrayCollection();
         $this->review = new ArrayCollection();
         $this->musicLikes = new ArrayCollection();
+        $this->musicDislikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -440,10 +448,49 @@ class Music
         return $this;
     }
 
+    /**
+     * @return Collection<int, MusicDislike>
+     */
+    public function getMusicDislikes(): Collection
+    {
+        return $this->musicDislikes;
+    }
+
+    public function addMusicDislike(MusicDislike $musicDislike): self
+    {
+        if (!$this->musicDislikes->contains($musicDislike)) {
+            $this->musicDislikes[] = $musicDislike;
+            $musicDislike->setMusicDisliked($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicDislike(MusicDislike $musicDislike): self
+    {
+        if ($this->musicDislikes->removeElement($musicDislike)) {
+            // set the owning side to null (unless already changed)
+            if ($musicDislike->getMusicDisliked() === $this) {
+                $musicDislike->setMusicDisliked(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function isLikedByUser(User $user): bool
     {
         foreach ($this->musicLikes as $like){
             if ($like->getUserWhoLikeMusic() === $user) return true;
+        }
+
+        return false;
+    }
+
+    public function isDislikedByUser(User $user): bool
+    {
+        foreach ($this->musicDislikes as $dislike){
+            if ($dislike->getUserWhoDislikeMusic() === $user) return true;
         }
 
         return false;

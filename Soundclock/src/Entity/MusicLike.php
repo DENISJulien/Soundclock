@@ -31,6 +31,8 @@ class MusicLike
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="musicLikeByUser")
+     * @Groups({"list_music_like"})
+     * @Groups({"show_music_like"})
      */
     private $userWhoLikeMusic;
 

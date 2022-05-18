@@ -24,6 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_music_like"})
      * @Groups({"show_music_like"})
+     * @Groups({"list_music_dislike"})
+     * @Groups({"show_music_dislike"})
      */
     private $id;
 
@@ -130,6 +132,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $musicLikeByUser;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MusicDislike::class, mappedBy="userWhoDislikeMusic")
+     */
+    private $musicDislikeByUser;
+
 
     public function __construct()
     {
@@ -137,6 +144,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->playlist = new ArrayCollection();
         $this->review = new ArrayCollection();
         $this->musicLikeByUser = new ArrayCollection();
+        $this->musicDislikeByUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -447,6 +455,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($musicLikeByUser->getUserWhoLikeMusic() === $this) {
                 $musicLikeByUser->setUserWhoLikeMusic(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MusicDislike>
+     */
+    public function getMusicDislikeByUser(): Collection
+    {
+        return $this->musicDislikeByUser;
+    }
+
+    public function addMusicDislikeByUser(MusicDislike $musicDislikeByUser): self
+    {
+        if (!$this->musicDislikeByUser->contains($musicDislikeByUser)) {
+            $this->musicDislikeByUser[] = $musicDislikeByUser;
+            $musicDislikeByUser->setUserWhoDislikeMusic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicDislikeByUser(MusicDislike $musicDislikeByUser): self
+    {
+        if ($this->musicDislikeByUser->removeElement($musicDislikeByUser)) {
+            // set the owning side to null (unless already changed)
+            if ($musicDislikeByUser->getUserWhoDislikeMusic() === $this) {
+                $musicDislikeByUser->setUserWhoDislikeMusic(null);
             }
         }
 

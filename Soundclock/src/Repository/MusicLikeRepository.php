@@ -52,8 +52,9 @@ class MusicLikeRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
         
         $sql = "
-        SELECT *
+        SELECT music.id AS id_music , name_music, picture_music
         FROM music_like
+        JOIN music ON music_like.music_liked_id = music.id
         WHERE user_who_like_music_id = '$id' ";
 
         $results = $conn->executeQuery($sql);

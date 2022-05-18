@@ -348,22 +348,6 @@ class ApiMusicController extends AbstractController
         );
     }
 
-
-    // /**
-    //  * @Route("/api/user/{userWhoLikeMusic}", name="api_show_user_like", methods={"GET"})
-    //  */
-    // public function musicLikedByUser(MusicLike $musicLike){
-
-        
-
-    //     return $this->json(
-    //         $musicLike,
-    //         200,
-    //         [],
-    //         ['groups' => ['show_music_like']]
-    //     );
-    // }
-
     /**
      * @Route("/api/user/like", name="api_show_user_like", methods={"POST"})
      */

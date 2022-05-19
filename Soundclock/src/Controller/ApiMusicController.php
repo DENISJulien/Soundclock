@@ -361,8 +361,6 @@ class ApiMusicController extends AbstractController
         return $this->json(
             $musicLikeRepository->findAllMusicLikedByUser($userWhoLikeMusicResult),
             200,
-            [],
-            ['groups' => ['show_music_like','show_music']]
         );
     }
 

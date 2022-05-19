@@ -401,7 +401,15 @@ nelmio_api_doc:
                     responses:
                         '200':
                             description: List Music Disliked By User
-            
+
+            # +1 Listen Music
+            /api/music/{id}/listen:
+                post:
+                        summary: +1 Listen Music
+                        description: +1 Listen Music Method 
+                        tags:
+                            - Sound'Clock API Music
+
         # Like Music
             /api/secure/music/{id}/like:
                 get:

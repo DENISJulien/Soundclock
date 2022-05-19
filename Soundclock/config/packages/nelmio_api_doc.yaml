@@ -379,6 +379,28 @@ nelmio_api_doc:
                     responses:
                         '200':
                             description: List Music Liked By User
+
+            # List Music Who User Dislike
+            /api/user/dislike:
+                post:
+                    summary: List Music Who User Dislike
+                    description: List Music Who User Dislike Method 
+                    tags:
+                        - Sound'Clock API Music
+                    requestBody:
+                        description: application/json
+                        required: true
+                        content: 
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        idUserWhoDislikeMusic:
+                                            type: integer
+
+                    responses:
+                        '200':
+                            description: List Music Disliked By User
             
         # Like Music
             /api/secure/music/{id}/like:

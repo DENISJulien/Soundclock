@@ -47,6 +47,20 @@ class MusicDislikeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllMusicDislikedByUser($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+        SELECT music.id AS id_music , name_music, picture_music
+        FROM music_dislike
+        JOIN music ON music_dislike.music_disliked_id = music.id
+        WHERE user_who_dislike_music_id = '$id' ";
+
+        $results = $conn->executeQuery($sql);
+        return $results->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return MusicDislike[] Returns an array of MusicDislike objects
 //     */

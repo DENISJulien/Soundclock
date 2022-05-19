@@ -355,12 +355,28 @@ class ApiMusicController extends AbstractController
 
         $userWhoLikeMusic = $request->getcontent();
         $userWhoLikeMusicDecoded = json_decode($userWhoLikeMusic);
-        // dd ($filterDecoded);
+
         $userWhoLikeMusicResult = $userWhoLikeMusicDecoded->idUserWhoLikeMusic;
 
         return $this->json(
             $musicLikeRepository->findAllMusicLikedByUser($userWhoLikeMusicResult),
-            200,
+            200
+        );
+    }
+
+    /**
+     * @Route("/api/user/dislike", name="api_show_user_dislike", methods={"POST"})
+     */
+    public function musicDislikedByUser(MusicDislikeRepository $musicDislikeRepository,Request $request){
+
+        $userWhoDislikeMusic = $request->getcontent();
+        $userWhoDislikeMusicDecoded = json_decode($userWhoDislikeMusic);
+
+        $userWhoDislikeMusicResult = $userWhoDislikeMusicDecoded->idUserWhoDislikeMusic;
+
+        return $this->json(
+            $musicDislikeRepository->findAllMusicDislikedByUser($userWhoDislikeMusicResult),
+            200
         );
     }
 

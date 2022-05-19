@@ -380,4 +380,23 @@ class ApiMusicController extends AbstractController
         );
     }
 
+    /**
+     * @Route("/api/music/{id}/listen", name="api_music_listen", methods={"POST"})
+     */
+    public function musicListen(Music $music,EntityManagerInterface $entityManager){
+
+        $currentListen = $music->getNblistenedMusic();
+        $listen = $music->setNblistenedMusic (++ $currentListen);
+
+        $entityManager->persist($listen);
+        $entityManager->flush();
+
+        return $this->json(
+            $listen,
+            200,
+            [],
+            ['groups' => ['show_music']]
+        );
+    }
+
 }

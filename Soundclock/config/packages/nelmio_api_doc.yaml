@@ -410,7 +410,7 @@ nelmio_api_doc:
                         tags:
                             - Sound'Clock API Music
 
-        # Like Music
+            # Like Music
             /api/secure/music/{id}/like:
                 get:
                     summary: NB Like Music
@@ -423,7 +423,7 @@ nelmio_api_doc:
                     tags:
                         - Sound'Clock API Music
 
-        # Dislike Music
+            # Dislike Music
             /api/secure/music/{id}/dislike:
                 get:
                     summary: NB Dislike Music
@@ -435,6 +435,124 @@ nelmio_api_doc:
                     description: Dislike Method  
                     tags:
                         - Sound'Clock API Music
+            
+        # Entity Playlist
+            # Show Playlist                                         
+            /api/playlist:
+                get:
+                    summary: Show all Playlist
+                    description: Show All Methods
+                    tags:
+                        - Sound'Clock API Playlist
+
+                    responses:
+                        '200':
+                            description: Show All Methods
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+        
+            # Show One By ID Playlist                                             
+            /api/playlist/{id}:
+                get:
+                    summary: Show One By ID Playlist
+                    description: Show One By ID Methods
+                    tags:
+                        - Sound'Clock API Playlist
+                    parameters:
+                      - in: path
+                        name: id
+                        schema:
+                            type: integer
+                        required: true
+
+                    responses:
+                        '200':
+                            description: Show One By ID Playlist
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+                                    
+            # Show One By Slug Playlist 
+            /api/playlist/slug/{slug_playlist}:
+                get:
+                    summary: Show One By Slug Playlist 
+                    description: Show One By Slug Methods
+                    tags:
+                        - Sound'Clock API Playlist 
+                    parameters:
+                      - in: path
+                        name: slug_playlist
+                        schema:
+                            type: string
+                        required: true
+
+                    responses:
+                        '200':
+                            description: Show One By ID Playlist 
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+
+            # Add Playlist                                            
+            /api/secure/playlist/create:
+                post:
+                    summary: Creat Playlist
+                    description: Creat Method 
+                    tags:
+                        - Sound'Clock API Playlist
+                    requestBody:
+                        description: Multipart-form-data
+                        required: true
+                        content: 
+                            multipart/form-data:
+                                schema:
+                                    type: object
+                                    properties:
+                                        name_playlist:
+                                            type: string
+                                            description: Nom de la playlist.
+                                        description_playlist:
+                                            type: string
+                                            description: Description de la playlist si il y en a une.
+                                        picture_playlist:
+                                            type: string
+                                            format: binary
+                                            description: Image de la playlist.
+                                        album: 
+                                            type: boolean
+                                            description: Est-ce un album ?
+                                    required:
+                                        - name_playlist
+                                        - album
+
+                    responses:
+                        '200':
+                            description: Creat Playlist
+                            content:
+                                 multipart/form-data:
+                                    schema: 
+                                        type: object
+                                        properties:
+                                            name_playlist (Not Null):
+                                                type: string
+                                            description_playlist (Can Be Null):
+                                                type: string
+                                            picture_music (Can Be Null):
+                                                type: string
+                                                format: binary
+                                            album (Not Null):
+                                                type: boolean
+
 
     areas: # to filter documented areas
         path_patterns:

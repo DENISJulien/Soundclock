@@ -21,6 +21,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $id;
 
@@ -30,6 +32,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $name_music;
 
@@ -39,6 +43,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $file_music;
 
@@ -48,6 +54,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $picture_music;
 
@@ -57,6 +65,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $description_music;
 
@@ -66,6 +76,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $status_music;
 
@@ -75,6 +87,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $releasedate_music;
 
@@ -84,6 +98,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $nblike_music;
 
@@ -93,6 +109,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $nblistened_music;
 
@@ -102,6 +120,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $slug_music;
 
@@ -111,6 +131,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $created_at_music;
 
@@ -120,6 +142,8 @@ class Music
      * @Groups({"show_genre"})
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $updated_at_music;
 

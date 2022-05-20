@@ -19,6 +19,8 @@ class Playlist
      * @ORM\Column(type="integer")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $id;
 
@@ -26,6 +28,8 @@ class Playlist
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $name_playlist;
 
@@ -33,6 +37,8 @@ class Playlist
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $picture_playlist;
 
@@ -40,6 +46,8 @@ class Playlist
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $description_playlist;
 
@@ -47,6 +55,8 @@ class Playlist
      * @ORM\Column(type="boolean")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $album;
 
@@ -54,6 +64,8 @@ class Playlist
      * @ORM\Column(type="integer")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $status_playlist;
 
@@ -61,6 +73,8 @@ class Playlist
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $nblike_playlist;
 
@@ -68,6 +82,8 @@ class Playlist
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $slug_playlist;
 
@@ -75,6 +91,8 @@ class Playlist
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $created_at_playlist;
 
@@ -82,16 +100,22 @@ class Playlist
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $updated_at_playlist;
 
     /**
      * @ORM\ManyToMany(targetEntity=Music::class, mappedBy="playlist")
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $music;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="playlist")
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
      */
     private $user;
 

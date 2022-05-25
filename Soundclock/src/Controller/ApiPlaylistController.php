@@ -7,6 +7,7 @@ use App\Models\JsonError;
 use App\Repository\MusicRepository;
 use App\Repository\PlaylistRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,24 +71,32 @@ class ApiPlaylistController extends AbstractController
     /**
      * @Route("api/secure/playlist/create", name="api_playlist_create", methods={"POST"})
      */
-    public function createPlaylist(MusicRepository $musicRepository, Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator){
+    public function createPlaylist(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator){
         $playlistEntity = New Playlist();
 
         $upload = $request->files;
 
-            foreach ($upload as $key => $uploadFile)
-            {
-                $uploadedName = md5(uniqid()) . '.' . $uploadFile->guessExtension();
+        foreach ($upload as $key => $uploadFile)
+        {
+            $uploadedName = md5(uniqid()) . '.' . $uploadFile->guessExtension();
 
-                $errors = $validator->validate($uploadFile, new Image([]));
+            $errors = $validator->validate($uploadFile, new Image([]));
 
-                $uploadFile->move(
-                    $this->getParameter('upload_directory'),
-                    $uploadedName
-                );
+            if (count($errors) > 0) {
 
-                $playlistEntity->setPicturePlaylist($uploadedName);
+                $myJsonError = new JsonError(Response::HTTP_UNPROCESSABLE_ENTITY, "Des erreurs de validation ont été trouvées");
+                $myJsonError->setValidationErrors($errors);
+        
+                return $this->json($myJsonError, $myJsonError->getError());
             }
+
+            $uploadFile->move(
+                $this->getParameter('upload_directory'),
+                $uploadedName
+            );
+
+            $playlistEntity->setPicturePlaylist($uploadedName);
+        }
 
         $playlistEntity->setNamePlaylist($request->request->get('name_playlist'));
         $playlistEntity->setDescriptionPlaylist($request->request->get('description_playlist'));
@@ -106,5 +115,62 @@ class ApiPlaylistController extends AbstractController
             ['groups' => ['show_playlist']]
         );
 
+    }
+
+    /**
+     * @Route("api/secure/playlist/edit/{id}", name="api_playlist_edit", methods={"POST"})
+     */
+    public function EditPlaylist(Playlist $playlist,Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator){
+        
+        $upload = $request->files;
+
+        foreach ($upload as $key => $uploadFile)
+        {
+            $uploadedName = md5(uniqid()) . '.' . $uploadFile->guessExtension();
+
+            $errors = $validator->validate($uploadFile, new Image([]));
+
+            if (count($errors) > 0) {
+
+                $myJsonError = new JsonError(Response::HTTP_UNPROCESSABLE_ENTITY, "Des erreurs de validation ont été trouvées");
+                $myJsonError->setValidationErrors($errors);
+        
+                return $this->json($myJsonError, $myJsonError->getError());
+            }
+
+            $uploadFile->move(
+                $this->getParameter('upload_directory'),
+                $uploadedName
+            );
+            if($key === 'picture_music'){
+                $playlist->setPicturePlaylist($uploadedName);
+            }
+            
+        }
+
+
+        if ($request->request->get('name_playlist')!== null) {
+            $playlist->setNamePlaylist($request->request->get('name_playlist'));
+        }
+        if ($request->request->get('description_playlist')!== null) {
+            $playlist->setDescriptionPlaylist($request->request->get('description_playlist'));
+        }
+        if ($request->request->get('album')!== null) {
+            $playlist->setAlbum($request->request->get('album'));
+        }
+        if ($request->request->get('status_playlist')!== null) {
+            $playlist->setStatusPlaylist($request->request->get('status_playlist'));
+        }
+        $playlist->setUpdatedAtPlaylist(new DateTime('now'));
+
+        $entityManager->persist($playlist);
+        $entityManager->flush();
+
+        return $this->json(
+            [],
+            Response::HTTP_CREATED,
+            [],
+            ['groups' => ['show_playlist']]
+        );
     }
 }

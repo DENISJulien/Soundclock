@@ -81,7 +81,6 @@ class ApiMusicController extends AbstractController
     }
 
     /**
-    *
     * @Route("/api/secure/music/create", name="api_music_create", methods={"POST"})
     */
     public function createMusic(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator, UserRepository $userRepository)
@@ -137,7 +136,6 @@ class ApiMusicController extends AbstractController
             } else {
                 $musicEntity->setFileMusic($uploadedName);
             }
-
         }
         
         $entityManager->persist($musicEntity);

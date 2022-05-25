@@ -552,6 +552,58 @@ nelmio_api_doc:
                                                 format: binary
                                             album (Not Null):
                                                 type: boolean
+            
+            # Edit Playlist                                            
+            /api/secure/playlist/edit/{id}:
+                post:
+                    summary: Edit Playlist
+                    description: Edit Method 
+                    tags:
+                        - Sound'Clock API Playlist
+                    requestBody:
+                        description: Multipart-form-data
+                        required: true
+                        content: 
+                            multipart/form-data:
+                                schema:
+                                    type: object
+                                    properties:
+                                        name_playlist:
+                                            type: string
+                                            description: Nom de la playlist.
+                                        description_playlist:
+                                            type: string
+                                            description: Description de la playlist si il y en a une.
+                                        picture_playlist:
+                                            type: string
+                                            format: binary
+                                            description: Image de la playlist.
+                                        album: 
+                                            type: boolean
+                                            description: Est-ce un album ?
+                                        status_playlist:
+                                            type: integer
+                                            description: Status à 1 si playlist visible à tout le monde, Status à 2 si playlist visible seulement par l'utilisateur, Status à 3 si playlist désactivé (surtout utilisé pour les admins par exemple).
+
+                    responses:
+                        '200':
+                            description: Edit Playlist
+                            content:
+                                 multipart/form-data:
+                                    schema: 
+                                        type: object
+                                        properties:
+                                            name_playlist:
+                                                type: string
+                                            description_playlist:
+                                                type: string
+                                            picture_music:
+                                                type: string
+                                                format: binary
+                                            album:
+                                                type: boolean
+                                            status_playlist:
+                                                type: integer
 
 
     areas: # to filter documented areas

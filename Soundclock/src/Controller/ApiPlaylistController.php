@@ -173,4 +173,29 @@ class ApiPlaylistController extends AbstractController
             ['groups' => ['show_playlist']]
         );
     }
+
+    /**
+     * @Route("api/secure/playlist/delete/{id}", name="api_playlist_delete", methods={"POST"})
+     */
+     public function DeletePlaylist(Playlist $playlist, EntityManagerInterface $entityManager){
+        $user = $this->getUser();
+        if (!$user){
+            return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ],
+        403);
+        } 
+        else {
+            $entityManager->remove($playlist);
+            $entityManager->flush();
+        }
+
+        return $this->json(
+            [],
+            200,
+            [],
+            ['groups' => ['show_playlist']]
+        );
+     }
 }

@@ -604,6 +604,46 @@ nelmio_api_doc:
                                                 type: boolean
                                             status_playlist:
                                                 type: integer
+                                            
+            # Delete Playlist                                            
+            /api/secure/playlist/delete/{id}:
+                post:
+                    summary: Delete Playlist
+                    description: Delete Method 
+                    tags:
+                        - Sound'Clock API Playlist
+
+            # AddMusic Playlist                                            
+            /api/secure/playlist/addmusic/{id}:
+                post:
+                    summary: AddMusic Playlist
+                    description: AddMusic Method 
+                    tags:
+                        - Sound'Clock API Playlist
+                    requestBody:
+                        description: Multipart-form-data
+                        required: true
+                        content: 
+                            multipart/form-data:
+                                schema:
+                                    type: object
+                                    properties:
+                                        music_id:
+                                            type: integer
+                                            description: Id de la Music.
+                                    required:
+                                        - music_id
+
+                    responses:
+                        '200':
+                            description: AddMusic Playlist
+                            content:
+                                 multipart/form-data:
+                                    schema: 
+                                        type: object
+                                        properties:
+                                            music:
+                                                type: integer
 
 
     areas: # to filter documented areas

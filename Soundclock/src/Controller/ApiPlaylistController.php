@@ -184,18 +184,48 @@ class ApiPlaylistController extends AbstractController
             'code' => 403,
             'message' => "Unauthorized"
         ],
-        403);
-        } 
-        else {
+            403
+        );
+        } else {
             $entityManager->remove($playlist);
             $entityManager->flush();
-        }
 
-        return $this->json(
-            [],
-            200,
-            [],
-            ['groups' => ['show_playlist']]
+            return $this->json(
+                [],
+                200,
+                [],
+                ['groups' => ['show_playlist']]
+            );
+        }
+    }
+     
+
+    /**
+     * @Route("api/secure/playlist/addmusic/{id}", name="api_playlist_addmusic", methods={"POST"})
+     */
+    public function AddMusicToPlaylist(EntityManagerInterface $entityManager, Playlist $playlist, Request $request,MusicRepository $musicRepository){
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(
+                [
+            'code' => 403,
+            'message' => "Unauthorized"
+        ],
+            403
         );
-     }
+        } else {
+            
+            $trueMusic = $musicRepository->find($request->request->get('music_id'));
+            $playlist->addMusic($trueMusic);
+            $entityManager->persist($playlist);
+            $entityManager->flush();
+
+            return $this->json(
+                [],
+                200,
+                [],
+                ['groups' => ['show_playlist']]
+            );
+        }
+    }
 }

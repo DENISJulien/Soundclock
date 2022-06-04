@@ -347,4 +347,22 @@ class Playlist
 
         return $this;
     }
+
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->playlistLikes as $like){
+            if ($like->getUserWhoLikePlaylist() === $user) return true;
+        }
+
+        return false;
+    }
+
+    public function isDislikedByUser(User $user): bool
+    {
+        foreach ($this->playlistDislikes as $dislike){
+            if ($dislike->getUserWhoDisLikePLaylist() === $user) return true;
+        }
+
+        return false;
+    }
 }

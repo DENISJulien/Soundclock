@@ -644,6 +644,32 @@ nelmio_api_doc:
                                         properties:
                                             music:
                                                 type: integer
+                                        
+            # Like Playlist
+            /api/secure/playlist/{id}/like:
+                get:
+                    summary: NB Like Playlist
+                    description: Like Method 
+                    tags:
+                        - Sound'Clock API Playlist
+                post:
+                    summary: Like Playlist
+                    description: Like Method 
+                    tags:
+                        - Sound'Clock API Playlist
+
+            # Dislike Playlist
+            /api/secure/playlist/{id}/dislike:
+                get:
+                    summary: NB Dislike Playlist
+                    description: Dislike Method 
+                    tags:
+                        - Sound'Clock API Playlist
+                post:
+                    summary: Dislike Playlist
+                    description: Dislike Method  
+                    tags:
+                        - Sound'Clock API Playlist
 
 
     areas: # to filter documented areas

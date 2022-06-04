@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Playlist;
+use App\Entity\PlaylistLike;
 use App\Models\JsonError;
 use App\Repository\MusicRepository;
+use App\Repository\PlaylistLikeRepository;
 use App\Repository\PlaylistRepository;
 use App\Repository\UserRepository;
 use DateTime;
@@ -226,6 +228,54 @@ class ApiPlaylistController extends AbstractController
                 ['groups' => ['show_playlist']]
             );
         }
+    }
+
+    /**
+     * Ajout d'un like à une playlist
+     * @Route("/api/secure/playlist/{id}/like", name="api_playlist_like_by_user", methods={"GET","POST"})
+     */
+    public function musicLiked(Playlist $playlist, EntityManagerInterface $entityManager,PlaylistLikeRepository $playlistLikeRepository){
+
+        $user = $this->getUser();
+
+        if (!$user) return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ],
+        403);
+
+        if($playlist->isLikedByUser($user)) {
+            $like = $playlistLikeRepository->findOneBy([
+                'playlistLiked' => $playlist,
+                'userWhoLikePlaylist' => $user
+            ]);
+
+            $entityManager->remove($like);
+            $entityManager->flush();
+
+            return $this->json([
+                'nbLikePlaylist' => $playlistLikeRepository->count(['playlistLiked' => $playlist])],
+            200,
+            );
+        }
+        
+        $like = new PlaylistLike();
+
+        $like->setPlaylistLiked($playlist);
+
+        $like->setUserWhoLikePlaylist($user);
+
+        $entityManager->persist($like);
+        $entityManager->flush();
+        
+        return $this->json(
+            [$like,
+            'nbLikePlaylist' => $playlistLikeRepository->count(['playlistLiked' => $playlist])],
+            200,
+            [],
+            ['groups' => ['show_playlist_like']]
+
+        );
     }
 
 }

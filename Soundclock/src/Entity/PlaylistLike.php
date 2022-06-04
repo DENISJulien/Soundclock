@@ -14,16 +14,22 @@ class PlaylistLike
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_playlist_like"})
+     * @Groups({"show_playlist_like"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Playlist::class, inversedBy="playlistLikes")
+     * @Groups({"list_playlist_like"})
+     * @Groups({"show_playlist_like"})
      */
     private $playlistLiked;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="playlistLikebyUser")
+     * @Groups({"list_playlist_like"})
+     * @Groups({"show_playlist_like"})
      */
     private $userWhoLikePlaylist;
 

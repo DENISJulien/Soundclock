@@ -81,8 +81,8 @@ class ApiMusicController extends AbstractController
     }
 
     /**
-    * @Route("/api/secure/music/create", name="api_music_create", methods={"POST"})
-    */
+     * @Route("/api/secure/music/create", name="api_music_create", methods={"POST"})
+     */
     public function createMusic(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator, UserRepository $userRepository)
     {        
         $musicEntity = new Music();
@@ -222,6 +222,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
+     * Top 10 musique liké
      * @Route("/api/music/top10/like", name="api_music_top10_like", methods={"GET"})
      */
     public function listTop10ByLike(MusicRepository $musicRepository): Response
@@ -238,6 +239,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
+     * Top 10 musique ecouté
      * @Route("/api/music/top10/listened", name="api_music_top10_listened", methods={"GET"})
      */
     public function listTop10ByListened(MusicRepository $musicRepository): Response
@@ -253,6 +255,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
+     * Ajout d'un like à une musique
      * @Route("/api/secure/music/{id}/like", name="api_music_like_by_user", methods={"GET","POST"})
      */
     public function musicLiked(Music $music, EntityManagerInterface $entityManager,MusicLikeRepository $musicLikeRepository){
@@ -300,6 +303,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
+     * Ajout d'un dislike à une musique
      * @Route("/api/secure/music/{id}/dislike", name="api_music_dislike_by_user", methods={"GET","POST"})
      */
     public function musicDisliked(Music $music, EntityManagerInterface $entityManager,MusicDislikeRepository $musicDislikeRepository){
@@ -346,6 +350,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
+     * Liste de musique like par un utilisateur
      * @Route("/api/user/like", name="api_show_user_like", methods={"POST"})
      */
     public function musicLikedByUser(MusicLikeRepository $musicLikeRepository,Request $request){
@@ -362,6 +367,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
+     * Liste de musique dislike par un utilisateur
      * @Route("/api/user/dislike", name="api_show_user_dislike", methods={"POST"})
      */
     public function musicDislikedByUser(MusicDislikeRepository $musicDislikeRepository,Request $request){
@@ -378,6 +384,7 @@ class ApiMusicController extends AbstractController
     }
 
     /**
+     * Ajout +1 du nombre d'ecoute
      * @Route("/api/music/{id}/listen", name="api_music_listen", methods={"POST"})
      */
     public function musicListen(Music $music,EntityManagerInterface $entityManager){

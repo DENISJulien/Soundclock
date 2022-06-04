@@ -14,16 +14,22 @@ class PlaylistDislike
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"list_playlist_dislike"})
+     * @Groups({"show_playlist_dislike"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Playlist::class, inversedBy="playlistDislikes")
+     * @Groups({"list_playlist_dislike"})
+     * @Groups({"show_playlist_dislike"})
      */
     private $playlistDisliked;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="playlistDislikeByUser")
+     * @Groups({"list_playlist_dislike"})
+     * @Groups({"show_playlist_dislike"})
      */
     private $userWhoDislikePlaylist;
 

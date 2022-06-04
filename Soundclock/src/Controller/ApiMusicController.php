@@ -97,7 +97,6 @@ class ApiMusicController extends AbstractController
 
         $trueUser = $userRepository->find($request->request->get('user'));
 
-        // dd($user);
         $musicEntity->addUser($trueUser);
 
         $upload = $request->files;

@@ -181,6 +181,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $musicDislikeByUser;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PlaylistLike::class, mappedBy="userWhoLikePlaylist")
+     */
+    private $playlistLikebyUser;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PlaylistDislike::class, mappedBy="userWhoDislikePlaylist")
+     */
+    private $playlistDislikeByUser;
+
 
     public function __construct()
     {
@@ -189,6 +199,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->review = new ArrayCollection();
         $this->musicLikeByUser = new ArrayCollection();
         $this->musicDislikeByUser = new ArrayCollection();
+        $this->playlistLikebyUser = new ArrayCollection();
+        $this->playlistDislikeByUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -529,6 +541,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($musicDislikeByUser->getUserWhoDislikeMusic() === $this) {
                 $musicDislikeByUser->setUserWhoDislikeMusic(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PlaylistLike>
+     */
+    public function getPlaylistLikebyUser(): Collection
+    {
+        return $this->playlistLikebyUser;
+    }
+
+    public function addPlaylistLikebyUser(PlaylistLike $playlistLikebyUser): self
+    {
+        if (!$this->playlistLikebyUser->contains($playlistLikebyUser)) {
+            $this->playlistLikebyUser[] = $playlistLikebyUser;
+            $playlistLikebyUser->setUserWhoLikePlaylist($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylistLikebyUser(PlaylistLike $playlistLikebyUser): self
+    {
+        if ($this->playlistLikebyUser->removeElement($playlistLikebyUser)) {
+            // set the owning side to null (unless already changed)
+            if ($playlistLikebyUser->getUserWhoLikePlaylist() === $this) {
+                $playlistLikebyUser->setUserWhoLikePlaylist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PlaylistDislike>
+     */
+    public function getPlaylistDislikeByUser(): Collection
+    {
+        return $this->playlistDislikeByUser;
+    }
+
+    public function addPlaylistDislikeByUser(PlaylistDislike $playlistDislikeByUser): self
+    {
+        if (!$this->playlistDislikeByUser->contains($playlistDislikeByUser)) {
+            $this->playlistDislikeByUser[] = $playlistDislikeByUser;
+            $playlistDislikeByUser->setUserWhoDislikePlaylist($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylistDislikeByUser(PlaylistDislike $playlistDislikeByUser): self
+    {
+        if ($this->playlistDislikeByUser->removeElement($playlistDislikeByUser)) {
+            // set the owning side to null (unless already changed)
+            if ($playlistDislikeByUser->getUserWhoDislikePlaylist() === $this) {
+                $playlistDislikeByUser->setUserWhoDislikePlaylist(null);
             }
         }
 

@@ -214,7 +214,6 @@ class ApiPlaylistController extends AbstractController
             403
         );
         } else {
-            
             $trueMusic = $musicRepository->find($request->request->get('music_id'));
             $playlist->addMusic($trueMusic);
             $entityManager->persist($playlist);
@@ -228,4 +227,5 @@ class ApiPlaylistController extends AbstractController
             );
         }
     }
+
 }

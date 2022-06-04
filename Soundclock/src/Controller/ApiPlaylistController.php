@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Playlist;
+use App\Entity\PlaylistDislike;
 use App\Entity\PlaylistLike;
 use App\Models\JsonError;
 use App\Repository\MusicRepository;
+use App\Repository\PlaylistDislikeRepository;
 use App\Repository\PlaylistLikeRepository;
 use App\Repository\PlaylistRepository;
 use App\Repository\UserRepository;
@@ -234,7 +236,7 @@ class ApiPlaylistController extends AbstractController
      * Ajout d'un like à une playlist
      * @Route("/api/secure/playlist/{id}/like", name="api_playlist_like_by_user", methods={"GET","POST"})
      */
-    public function musicLiked(Playlist $playlist, EntityManagerInterface $entityManager,PlaylistLikeRepository $playlistLikeRepository){
+    public function playlistLiked(Playlist $playlist, EntityManagerInterface $entityManager,PlaylistLikeRepository $playlistLikeRepository){
 
         $user = $this->getUser();
 
@@ -275,6 +277,53 @@ class ApiPlaylistController extends AbstractController
             [],
             ['groups' => ['show_playlist_like']]
 
+        );
+    }
+
+    /**
+     * Ajout d'un dislike à une musique
+     * @Route("/api/secure/playlist/{id}/dislike", name="api_playlist_dislike_by_user", methods={"GET","POST"})
+     */
+    public function playlistDisliked(Playlist $playlist, EntityManagerInterface $entityManager,PlaylistDislikeRepository $playlistDislikeRepository){
+
+        $user = $this->getUser();
+
+        if (!$user) return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ],
+        403);
+
+        if($playlist->isDislikedByUser($user)) {
+            $dislike = $playlistDislikeRepository->findOneBy([
+                'playlistDisliked' => $playlist,
+                'userWhoDislikePlaylist' => $user
+            ]);
+
+            $entityManager->remove($dislike);
+            $entityManager->flush();
+
+            return $this->json([
+                'nbDislikeplaylist' => $playlistDislikeRepository->count(['playlistDisliked' => $playlist])],
+            200,
+            );
+        }
+        
+        $dislike = new PlaylistDislike();
+    
+        $dislike->setPlaylistDisliked($playlist);
+
+        $dislike->setUserWhoDislikePlaylist($user);
+
+        $entityManager->persist($dislike);
+        $entityManager->flush();
+        
+        return $this->json(
+            [$dislike,
+            'nbDislikePlaylist' => $playlistDislikeRepository->count(['playlistDisliked' => $playlist])],
+            200,
+            [],
+            ['groups' => ['show_playlist_dislike']]
         );
     }
 

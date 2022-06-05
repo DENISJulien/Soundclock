@@ -13,7 +13,9 @@ nelmio_api_doc:
         security:
             - bearerAuth: []
         # https://swagger.io/docs/specification/paths-and-operations/
-        paths: # documentation de la route pour obtenir le token lexkit
+        paths: 
+
+        #* Route Json Web Token
             /api/login_check:
                 post:
                     summary: Auth method
@@ -44,8 +46,8 @@ nelmio_api_doc:
                                         properties:
                                             token:
                                                 type: string
-        # Entity Banner
-            # Show All Banner                                             
+        #* Entity Banner
+            #? Show All Banner                                             
             /api/banner:
                 get:
                     summary: Show all Banner
@@ -63,7 +65,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
         
-            # Show One By ID Banner                                             
+            #? Show One By ID Banner                                             
             /api/banner/{id}:
                 get:
                     summary: Show One By ID Banner
@@ -87,8 +89,8 @@ nelmio_api_doc:
                                         items: 
                                             type: string
 
-        # Entity Genre
-            # Show All Genre
+        #* Entity Genre
+            #? Show All Genre
             /api/genre:
                 get:
                     summary: Show all Genres
@@ -106,7 +108,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
             
-            # Show One By Id Genre 
+            #? Show One By Id Genre 
             /api/genre/{id}:
                 get:
                     summary: Show One By ID Genre
@@ -130,9 +132,9 @@ nelmio_api_doc:
                                         items: 
                                             type: string
         
-        # Entity Music
-        # Routes Music GET
-            # Show All Music
+        #* Entity Music
+        #! Routes Music GET
+            #? Show All Music
             /api/music:
                 get:
                     summary: Show all Music
@@ -150,7 +152,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
             
-            # Show One By Id Music 
+            #? Show One By Id Music 
             /api/music/{id}:
                 get:
                     summary: Show One By ID Music
@@ -174,7 +176,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
 
-            # Show One By Slug Music 
+            #? Show One By Slug Music 
             /api/music/slug/{slug_music}:
                 get:
                     summary: Show One By Slug Music
@@ -198,7 +200,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
                             
-            # Show TOP10 Music Liked
+            #? Show TOP10 Music Liked
             /api/music/top10/like:
                 get:
                     summary: Show TOP10 Music Liked
@@ -216,7 +218,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
                             
-            # Show TOP10 Music Listened
+            #? Show TOP10 Music Listened
             /api/music/top10/listened:
                 get:
                     summary: Show TOP10 Music Listened
@@ -234,8 +236,8 @@ nelmio_api_doc:
                                         items: 
                                             type: string
 
-        # Routes Music POST  
-            # Add Music                                            
+        #! Routes Music POST  
+            #? Add Music                                            
             /api/secure/music/create:
                 post:
                     summary: Creat Music
@@ -299,7 +301,7 @@ nelmio_api_doc:
                                             user (id) (Not Null):
                                                 type: integer
 
-            # Edit Music                                            
+            #? Edit Music                                            
             /api/secure/music/edit/{id}:
                 post:
                     summary: Edit Music
@@ -358,8 +360,9 @@ nelmio_api_doc:
                                             status_music:
                                                 type: integer
             
-            # List Music Who User Like
-            /api/user/like:
+        #! Routes Music Like / Dislike
+            #? List Music Who User Like
+            /api/music/user/like:
                 post:
                     summary: List Music Who User Like
                     description: List Music Who User Like Method 
@@ -380,8 +383,8 @@ nelmio_api_doc:
                         '200':
                             description: List Music Liked By User
 
-            # List Music Who User Dislike
-            /api/user/dislike:
+            #? List Music Who User Dislike
+            /api/music/user/dislike:
                 post:
                     summary: List Music Who User Dislike
                     description: List Music Who User Dislike Method 
@@ -402,15 +405,7 @@ nelmio_api_doc:
                         '200':
                             description: List Music Disliked By User
 
-            # +1 Listen Music
-            /api/music/{id}/listen:
-                post:
-                        summary: +1 Listen Music
-                        description: +1 Listen Music Method 
-                        tags:
-                            - Sound'Clock API Music
-
-            # Like Music
+            #? Like Music
             /api/secure/music/{id}/like:
                 get:
                     summary: NB Like Music
@@ -423,7 +418,7 @@ nelmio_api_doc:
                     tags:
                         - Sound'Clock API Music
 
-            # Dislike Music
+            #? Dislike Music
             /api/secure/music/{id}/dislike:
                 get:
                     summary: NB Dislike Music
@@ -436,8 +431,17 @@ nelmio_api_doc:
                     tags:
                         - Sound'Clock API Music
             
-        # Entity Playlist
-            # Show Playlist                                         
+        #! +1 Listen Music
+            /api/music/{id}/listen:
+                post:
+                        summary: +1 Listen Music
+                        description: +1 Listen Music Method 
+                        tags:
+                            - Sound'Clock API Music
+            
+        #* Entity Playlist
+        #! Routes Playlist GET
+            #? Show Playlist                                         
             /api/playlist:
                 get:
                     summary: Show all Playlist
@@ -455,7 +459,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
         
-            # Show One By ID Playlist                                             
+            #? Show One By ID Playlist                                             
             /api/playlist/{id}:
                 get:
                     summary: Show One By ID Playlist
@@ -479,7 +483,7 @@ nelmio_api_doc:
                                         items: 
                                             type: string
                                     
-            # Show One By Slug Playlist 
+            #? Show One By Slug Playlist 
             /api/playlist/slug/{slug_playlist}:
                 get:
                     summary: Show One By Slug Playlist 
@@ -502,8 +506,9 @@ nelmio_api_doc:
                                         type: array
                                         items: 
                                             type: string
-
-            # Add Playlist                                            
+        
+        #! Route Playlist POST
+            #? Add Playlist                                            
             /api/secure/playlist/create:
                 post:
                     summary: Creat Playlist
@@ -553,7 +558,7 @@ nelmio_api_doc:
                                             album (Not Null):
                                                 type: boolean
             
-            # Edit Playlist                                            
+            #? Edit Playlist                                            
             /api/secure/playlist/edit/{id}:
                 post:
                     summary: Edit Playlist
@@ -605,7 +610,7 @@ nelmio_api_doc:
                                             status_playlist:
                                                 type: integer
                                             
-            # Delete Playlist                                            
+            #? Delete Playlist                                            
             /api/secure/playlist/delete/{id}:
                 post:
                     summary: Delete Playlist
@@ -613,7 +618,7 @@ nelmio_api_doc:
                     tags:
                         - Sound'Clock API Playlist
 
-            # AddMusic Playlist                                            
+            #? AddMusic Playlist                                            
             /api/secure/playlist/addmusic/{id}:
                 post:
                     summary: AddMusic Playlist
@@ -644,8 +649,53 @@ nelmio_api_doc:
                                         properties:
                                             music:
                                                 type: integer
-                                        
-            # Like Playlist
+        
+        #! Route Playlist Like / Dislike
+            #? List Playlist Who User Like
+            /api/playlist/user/like:
+                post:
+                    summary: List Playlist Who User Like
+                    description: List Playlist Who User Like Method 
+                    tags:
+                        - Sound'Clock API Playlist
+                    requestBody:
+                        description: application/json
+                        required: true
+                        content: 
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        idUserWhoLikePlaylist:
+                                            type: integer
+
+                    responses:
+                        '200':
+                            description: List Playlist Liked By User
+
+            #? List Playlist Who User Dislike
+            /api/playlist/user/dislike:
+                post:
+                    summary: List Playlist Who User Dislike
+                    description: List Playlist Who User Dislike Method 
+                    tags:
+                        - Sound'Clock API Playlist
+                    requestBody:
+                        description: application/json
+                        required: true
+                        content: 
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        idUserWhoDislikePlaylist:
+                                            type: integer
+
+                    responses:
+                        '200':
+                            description: List Playlist Disliked By User
+
+            #? Like Playlist
             /api/secure/playlist/{id}/like:
                 get:
                     summary: NB Like Playlist
@@ -658,7 +708,7 @@ nelmio_api_doc:
                     tags:
                         - Sound'Clock API Playlist
 
-            # Dislike Playlist
+            #? Dislike Playlist
             /api/secure/playlist/{id}/dislike:
                 get:
                     summary: NB Dislike Playlist

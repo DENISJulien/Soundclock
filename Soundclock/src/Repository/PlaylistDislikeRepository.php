@@ -39,6 +39,20 @@ class PlaylistDislikeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllPlaylistDislikedByUser($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+        SELECT playlist.id AS id_playlist , name_playlist, picture_playlist
+        FROM playlist_dislike
+        JOIN playlist ON playlist_dislike.playlist_disliked_id = playlist.id
+        WHERE user_who_dislike_playlist_id = '$id' ";
+
+        $results = $conn->executeQuery($sql);
+        return $results->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return PlaylistDislike[] Returns an array of PlaylistDislike objects
 //     */

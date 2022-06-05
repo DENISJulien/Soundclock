@@ -153,7 +153,6 @@ class ApiMusicController extends AbstractController
      */
     public function updateMusic(EntityManagerInterface $entityManager, Music $music, Request $request,ValidatorInterface $validator)
     {        
-        // dd($request);
         if ($request->request->get('name_music')!== null) {
             $music->setNameMusic($request->request->get('name_music'));
         }
@@ -228,7 +227,6 @@ class ApiMusicController extends AbstractController
     public function listTop10ByLike(MusicRepository $musicRepository): Response
     {
         $top10ByLike = $musicRepository->findTop10ByLike();
-        // dd($top10ByLike);
 
         return $this->json(
             $top10ByLike,
@@ -283,10 +281,8 @@ class ApiMusicController extends AbstractController
             );
         }
         
-        $like = new MusicLike();
-    
+        $like = new MusicLike(); 
         $like->setMusicLiked($music);
-
         $like->setUserWhoLikeMusic($user);
 
         $entityManager->persist($like);
@@ -332,9 +328,7 @@ class ApiMusicController extends AbstractController
         }
         
         $dislike = new MusicDislike();
-    
         $dislike->setMusicDisliked($music);
-
         $dislike->setUserWhoDislikeMusic($user);
 
         $entityManager->persist($dislike);
@@ -351,7 +345,7 @@ class ApiMusicController extends AbstractController
 
     /**
      * Liste de musique like par un utilisateur
-     * @Route("/api/user/like", name="api_show_user_like", methods={"POST"})
+     * @Route("/api/music/user/like", name="api_list_music_user_like", methods={"POST"})
      */
     public function musicLikedByUser(MusicLikeRepository $musicLikeRepository,Request $request){
 
@@ -368,7 +362,7 @@ class ApiMusicController extends AbstractController
 
     /**
      * Liste de musique dislike par un utilisateur
-     * @Route("/api/user/dislike", name="api_show_user_dislike", methods={"POST"})
+     * @Route("/api/music/user/dislike", name="api_list_music_user_dislike", methods={"POST"})
      */
     public function musicDislikedByUser(MusicDislikeRepository $musicDislikeRepository,Request $request){
 

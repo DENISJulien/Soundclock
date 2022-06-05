@@ -262,9 +262,7 @@ class ApiPlaylistController extends AbstractController
         }
         
         $like = new PlaylistLike();
-
         $like->setPlaylistLiked($playlist);
-
         $like->setUserWhoLikePlaylist($user);
 
         $entityManager->persist($like);
@@ -310,11 +308,9 @@ class ApiPlaylistController extends AbstractController
         }
         
         $dislike = new PlaylistDislike();
-    
         $dislike->setPlaylistDisliked($playlist);
-
         $dislike->setUserWhoDislikePlaylist($user);
-
+        
         $entityManager->persist($dislike);
         $entityManager->flush();
         
@@ -324,6 +320,41 @@ class ApiPlaylistController extends AbstractController
             200,
             [],
             ['groups' => ['show_playlist_dislike']]
+        );
+    }
+
+    /**
+     * Liste de playlist like par un utilisateur
+     * @Route("/api/playlist/user/like", name="api_list_playlist_user_like", methods={"POST"})
+     */
+    public function playlistLikedByUser(PlaylistLikeRepository $playlistLikeRepository,Request $request){
+
+        $userWhoLikePlaylist = $request->getcontent();
+        $userWhoLikePlaylistDecoded = json_decode($userWhoLikePlaylist);
+
+        $userWhoLikePlaylistResult = $userWhoLikePlaylistDecoded->idUserWhoLikePlaylist;
+
+        return $this->json(
+            $playlistLikeRepository->findAllPlaylistLikedByUser($userWhoLikePlaylistResult),
+            200
+        );
+    }
+
+    
+    /**
+     * Liste de playlist dislike par un utilisateur
+     * @Route("/api/playlist/user/dislike", name="api_list_playlist_user_dislike", methods={"POST"})
+     */
+    public function playlistDislikedByUser(PlaylistDislikeRepository $playlistDislikeRepository,Request $request){
+
+        $userWhoDislikePlaylist = $request->getcontent();
+        $userWhoDislikePlaylistDecoded = json_decode($userWhoDislikePlaylist);
+
+        $userWhoDislikePlaylistResult = $userWhoDislikePlaylistDecoded->idUserWhoDislikePlaylist;
+
+        return $this->json(
+            $playlistDislikeRepository->findAllPlaylistDislikedByUser($userWhoDislikePlaylistResult),
+            200
         );
     }
 

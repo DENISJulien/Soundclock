@@ -39,6 +39,20 @@ class PlaylistLikeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllPlaylistLikedByUser($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "
+        SELECT playlist.id AS id_playlist , name_playlist, picture_playlist
+        FROM playlist_like
+        JOIN playlist ON playlist_like.playlist_liked_id = playlist.id
+        WHERE user_who_like_playlist_id = '$id' ";
+
+        $results = $conn->executeQuery($sql);
+        return $results->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return PlaylistLike[] Returns an array of PlaylistLike objects
 //     */

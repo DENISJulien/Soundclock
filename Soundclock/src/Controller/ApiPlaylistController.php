@@ -118,7 +118,6 @@ class ApiPlaylistController extends AbstractController
             [],
             ['groups' => ['show_playlist']]
         );
-
     }
 
     /**
@@ -151,7 +150,6 @@ class ApiPlaylistController extends AbstractController
             }
             
         }
-
 
         if ($request->request->get('name_playlist')!== null) {
             $playlist->setNamePlaylist($request->request->get('name_playlist'));
@@ -255,6 +253,10 @@ class ApiPlaylistController extends AbstractController
             $entityManager->remove($like);
             $entityManager->flush();
 
+            $playlist->setNblikePlaylist($playlistLikeRepository->count(['playlistLiked' => $playlist]));
+            $entityManager->persist($playlist);
+            $entityManager->flush();
+
             return $this->json([
                 'nbLikePlaylist' => $playlistLikeRepository->count(['playlistLiked' => $playlist])],
             200,
@@ -266,6 +268,11 @@ class ApiPlaylistController extends AbstractController
         $like->setUserWhoLikePlaylist($user);
 
         $entityManager->persist($like);
+        $entityManager->flush();
+
+        $playlist->setNblikePlaylist($playlistLikeRepository->count(['playlistLiked' => $playlist]));
+        
+        $entityManager->persist($playlist);
         $entityManager->flush();
         
         return $this->json(

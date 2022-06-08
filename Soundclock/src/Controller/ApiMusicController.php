@@ -275,6 +275,10 @@ class ApiMusicController extends AbstractController
             $entityManager->remove($like);
             $entityManager->flush();
 
+            $music->setNblikeMusic($musicLikeRepository->count(['musicLiked' => $music]));
+            $entityManager->persist($music);
+            $entityManager->flush();
+
             return $this->json([
                 'nbLikeMusic' => $musicLikeRepository->count(['musicLiked' => $music])],
             200,
@@ -286,6 +290,11 @@ class ApiMusicController extends AbstractController
         $like->setUserWhoLikeMusic($user);
 
         $entityManager->persist($like);
+        $entityManager->flush();
+
+        $music->setNblikeMusic($musicLikeRepository->count(['musicLiked' => $music]));
+        
+        $entityManager->persist($music);
         $entityManager->flush();
         
         return $this->json(

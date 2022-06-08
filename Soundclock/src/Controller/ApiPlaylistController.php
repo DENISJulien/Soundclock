@@ -307,6 +307,10 @@ class ApiPlaylistController extends AbstractController
 
             $entityManager->remove($dislike);
             $entityManager->flush();
+
+            $playlist->setNbdislikePlaylist($playlistDislikeRepository->count(['playlistDisliked' => $playlist]));
+            $entityManager->persist($playlist);
+            $entityManager->flush();
             
 
             return $this->json([
@@ -320,6 +324,11 @@ class ApiPlaylistController extends AbstractController
         $dislike->setUserWhoDislikePlaylist($user);
         
         $entityManager->persist($dislike);
+        $entityManager->flush();
+
+        $playlist->setNbdislikePlaylist($playlistDislikeRepository->count(['playlistDisliked' => $playlist]));
+        
+        $entityManager->persist($playlist);
         $entityManager->flush();
         
         return $this->json(

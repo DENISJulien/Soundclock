@@ -129,6 +129,11 @@ class Playlist
      */
     private $playlistDislikes;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbdislike_playlist;
+
     public function __construct()
     {
         $this->music = new ArrayCollection();
@@ -364,5 +369,17 @@ class Playlist
         }
 
         return false;
+    }
+
+    public function getNbdislikePlaylist(): ?int
+    {
+        return $this->nbdislike_playlist;
+    }
+
+    public function setNbdislikePlaylist(?int $nbdislike_playlist): self
+    {
+        $this->nbdislike_playlist = $nbdislike_playlist;
+
+        return $this;
     }
 }

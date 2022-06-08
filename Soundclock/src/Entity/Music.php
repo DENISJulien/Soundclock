@@ -115,6 +115,17 @@ class Music
     private $nblistened_music;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list_genre"})
+     * @Groups({"show_genre"})
+     * @Groups({"list_music"})
+     * @Groups({"show_music"})
+     * @Groups({"list_playlist"})
+     * @Groups({"show_playlist"})
+     */
+    private $nbdislike_music;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_genre"})
      * @Groups({"show_genre"})
@@ -184,8 +195,6 @@ class Music
      * @ORM\OneToMany(targetEntity=MusicDislike::class, mappedBy="musicDisliked")
      */
     private $musicDislikes;
-
-
 
     public function __construct()
     {
@@ -512,6 +521,18 @@ class Music
         }
 
         return false;
+    }
+
+    public function getNbdislikeMusic(): ?int
+    {
+        return $this->nbdislike_music;
+    }
+
+    public function setNbdislikeMusic(?int $nbdislike_music): self
+    {
+        $this->nbdislike_music = $nbdislike_music;
+
+        return $this;
     }
 
 }

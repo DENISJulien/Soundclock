@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PlaylistDislikeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PlaylistDislikeRepository::class)

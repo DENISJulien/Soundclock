@@ -307,6 +307,7 @@ class ApiPlaylistController extends AbstractController
 
             $entityManager->remove($dislike);
             $entityManager->flush();
+            
 
             return $this->json([
                 'nbDislikeplaylist' => $playlistDislikeRepository->count(['playlistDisliked' => $playlist])],

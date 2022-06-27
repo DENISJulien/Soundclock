@@ -145,7 +145,7 @@ class ApiPlaylistController extends AbstractController
                 $this->getParameter('upload_directory'),
                 $uploadedName
             );
-            if($key === 'picture_music'){
+            if($key === 'picture_playlist'){
                 $playlist->setPicturePlaylist($uploadedName);
             }
             

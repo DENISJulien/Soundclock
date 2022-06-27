@@ -721,6 +721,115 @@ nelmio_api_doc:
                     tags:
                         - Sound'Clock API Playlist
 
+        #* Entity User
+        #! Routes User GET
+            #? Show All User
+            /api/user:
+                get:
+                    summary: Show all User
+                    description: Show All Methods
+                    tags:
+                        - Sound'Clock API User
+
+                    responses:
+                        '200':
+                            description: Show All Methods
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+            
+            #? Show One By Id User 
+            /api/user/{id}:
+                get:
+                    summary: Show One By ID User
+                    description: Show One By ID Methods
+                    tags:
+                        - Sound'Clock API User
+                    parameters:
+                      - in: path
+                        name: id
+                        schema:
+                            type: integer
+                        required: true
+
+                    responses:
+                        '200':
+                            description: Show One By ID User
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+
+            #? Show One By Slug User 
+            /api/user/slug/{slug_user}:
+                get:
+                    summary: Show One By Slug User
+                    description: Show One By Slug Methods
+                    tags:
+                        - Sound'Clock API User
+                    parameters:
+                      - in: path
+                        name: slug_user
+                        schema:
+                            type: string
+                        required: true
+
+                    responses:
+                        '200':
+                            description: Show One By ID User
+                            content:
+                                application/json:
+                                    schema: 
+                                        type: array
+                                        items: 
+                                            type: string
+
+        #! Route User POST
+            #? Add User                                            
+            /api/secure/user/create:
+                post:
+                    summary: Creat User
+                    description: Creat Method 
+                    tags:
+                        - Sound'Clock API User
+                    requestBody:
+                        description: JSON Object
+                        required: true
+                        content: 
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        email:
+                                            type: string
+                                        password:
+                                            type: string
+                                        name_user:
+                                            type: string
+
+                    responses:
+                        '200':
+                            description: Creat Playlist
+                            content:
+                                 multipart/form-data:
+                                    schema: 
+                                        type: object
+                                        properties:
+                                            name_playlist (Not Null):
+                                                type: string
+                                            description_playlist (Can Be Null):
+                                                type: string
+                                            picture_music (Can Be Null):
+                                                type: string
+                                                format: binary
+                                            album (Not Null):
+                                                type: boolean
+
 
     areas: # to filter documented areas
         path_patterns:

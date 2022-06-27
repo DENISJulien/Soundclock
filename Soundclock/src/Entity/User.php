@@ -26,6 +26,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $id;
 
@@ -37,6 +39,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $email;
 
@@ -48,6 +52,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $roles = [];
 
@@ -65,6 +71,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $name_user;
 
@@ -76,6 +84,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $picture_user;
 
@@ -87,6 +97,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $description_user;
 
@@ -98,6 +110,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $certification_user;
 
@@ -109,6 +123,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $status_user;
 
@@ -120,6 +136,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $label_user;
 
@@ -131,6 +149,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $slug_user;
 
@@ -142,6 +162,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $created_at_user;
 
@@ -153,21 +175,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $updated_at_user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Music::class, mappedBy="user")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $music;
 
     /**
      * @ORM\OneToMany(targetEntity=Playlist::class, mappedBy="user")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $playlist;
 
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="user")
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $review;
 

@@ -21,6 +21,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $id;
 
@@ -30,6 +32,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $name_playlist;
 
@@ -39,6 +43,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $picture_playlist;
 
@@ -48,6 +54,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $description_playlist;
 
@@ -57,6 +65,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $album;
 
@@ -66,6 +76,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $status_playlist;
 
@@ -75,6 +87,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $nblike_playlist;
 
@@ -84,6 +98,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $slug_playlist;
 
@@ -93,6 +109,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $created_at_playlist;
 
@@ -102,6 +120,8 @@ class Playlist
      * @Groups({"show_music"})
      * @Groups({"list_playlist"})
      * @Groups({"show_playlist"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $updated_at_playlist;
 

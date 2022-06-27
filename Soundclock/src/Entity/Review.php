@@ -17,6 +17,8 @@ class Review
      * @ORM\Column(type="integer")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $id;
 
@@ -24,6 +26,8 @@ class Review
      * @ORM\Column(type="string", length=255)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $name_review;
 
@@ -31,6 +35,8 @@ class Review
      * @ORM\Column(type="text")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $content_review;
 
@@ -38,6 +44,8 @@ class Review
      * @ORM\Column(type="integer")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $status_review;
 
@@ -45,6 +53,8 @@ class Review
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $created_at_review;
 
@@ -52,6 +62,8 @@ class Review
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"list_music"})
      * @Groups({"show_music"})
+     * @Groups({"list_user"})
+     * @Groups({"show_user"})
      */
     private $updated_at_review;
 
